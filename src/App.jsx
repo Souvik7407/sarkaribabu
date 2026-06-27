@@ -10,6 +10,7 @@ import Criteria from './components/Criteria';
 import AudioPlayer from './components/AudioPlayer';
 import AITutor from './components/AITutor';
 import BuyMaterial from './components/BuyMaterial';
+import InfoModal from './components/InfoModal';
 
 // Import curated database
 import { initialCurrentAffairs, staticGKData, initialQuizzes, generateDailyNewsForDate, examCriteriaData } from './data/db';
@@ -194,6 +195,7 @@ const parseLiveArticles = async () => {
 export default function App() {
   // Navigation State
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [modalPage, setModalPage] = useState(null); // 'about', 'privacy', 'contact', or null
   
   // Theme State
   const [isLightTheme, setIsLightTheme] = useState(() => {
@@ -597,6 +599,15 @@ export default function App() {
               </div>
 
               <div className="footer-links-col">
+                <h4>Legal & Support</h4>
+                <ul>
+                  <li><a href="#about" onClick={(e) => { e.preventDefault(); setModalPage('about'); }}>About Us</a></li>
+                  <li><a href="#privacy" onClick={(e) => { e.preventDefault(); setModalPage('privacy'); }}>Privacy Policy</a></li>
+                  <li><a href="#contact" onClick={(e) => { e.preventDefault(); setModalPage('contact'); }}>Contact Us</a></li>
+                </ul>
+              </div>
+
+              <div className="footer-links-col">
                 <h4>Development</h4>
                 <ul>
                   <li><span className="footer-meta-item">Developer: <strong>Souvik Deb</strong></span></li>
@@ -620,6 +631,11 @@ export default function App() {
           <span className="toast-icon">✨</span>
           <span>{toast}</span>
         </div>
+      )}
+
+      {/* Policy and Info Modals */}
+      {modalPage && (
+        <InfoModal page={modalPage} onClose={() => setModalPage(null)} />
       )}
     </div>
   );
