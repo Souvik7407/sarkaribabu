@@ -490,6 +490,30 @@ export const staticGKData = [
           "Lord Mountbatten (1947-1948): Last Viceroy of British India and first Governor-General of independent India. Executed the Partition Plan (June 3 Plan)."
         ],
         mnemonic: "Cornwallis = Permanent Settlement; Bentinck = Banished Sati; Dalhousie = Doctrine of Lapse & Railway; Canning = Mutiny (1857) & First Viceroy; Curzon = Partition of Bengal."
+      },
+      {
+        title: "Classical & Folk Dances of India",
+        description: "Indian dance is divided into Classical (governed by Natya Shastra rules, devotional themes) and Folk (celebrating harvests, weddings, and local folklore with traditional regional music).",
+        keyPoints: [
+          "Eight Classical Dances: Sangeet Natak Akademi recognizes eight: Bharatnatyam (Tamil Nadu), Kathak (Uttar Pradesh), Kathakali (Kerala), Mohiniyattam (Kerala), Kuchipudi (Andhra Pradesh), Odissi (Odisha), Manipuri (Manipur), and Sattriya (Assam - introduced by saint Sankaradeva in the 15th century).",
+          "Bharatnatyam & Kuchipudi: Bharatnatyam is performed solo to Carnatic music, characterized by fire-dance movements and mudras. Kuchipudi uses both speech and song, and features 'Tarangam' where the dancer balances on brass plate edges.",
+          "Kathakali & Mohiniyattam: Kathakali represents the eternal fight between good and evil, characterized by elaborate facial makeup, masks, and eye movements. Mohiniyattam is the 'dance of the enchantress' performed solo by women, featuring graceful sway and white/gold sarees.",
+          "North & West Indian Folk Dances: Bhangra & Gidda (Punjab), Ghoomar & Kalbelia (Rajasthan - included in UNESCO's representative list), Garba & Dandiya (Gujarat), Lavani (Maharashtra).",
+          "East & South Indian Folk Dances: Chhau (Jharkhand/WB/Odisha - mask dance), Bihu (Assam), Yakshagana (Karnataka - dance drama), and Karakattam (Tamil Nadu)."
+        ],
+        mnemonic: "Classical = 8 styles. Sattriya = Assam (Sankaradeva). Kathak = North India (storytellers). Kalbelia = Rajasthan snake charmers (UNESCO list)."
+      },
+      {
+        title: "Famous Temples & UNESCO World Heritage Sites",
+        description: "India's architectural heritage ranges from rock-cut cave temples to structural marvels. UNESCO World Heritage Sites designate cultural and natural assets of universal value.",
+        keyPoints: [
+          "Nagara, Dravida & Vesara Styles: Nagara style (North India - curvilinear Shikhara, no boundary walls, e.g., Khajuraho, Sun Temple Konark), Dravida style (South India - pyramidal Gopurams, high boundary walls, temple tanks, e.g., Brihadisvara Temple), Vesara style (hybrid style - e.g., Hoysala Temples).",
+          "Rock-Cut Marvels: Kailash Temple at Ellora (Cave 16) carved out of a single monolithic rock from top to bottom under Rashtrakuta King Krishna I. Ajanta Caves (Maharashtra) contain 29 Buddhist caves decorated with Jataka fresco paintings.",
+          "Chola Temples: Brihadisvara Temple at Thanjavur, built by Rajaraja Chola I, is dedicated to Lord Shiva. Its vimana shadow is famously said never to fall on the ground at noon.",
+          "Khajuraho Group of Temples: Built by Chandela rulers in Madhya Pradesh between 950 and 1050 AD. Known for their Nagara-style erotic sculptures, representing Hindu and Jain faiths.",
+          "UNESCO Milestones: India has 42 UNESCO World Heritage Sites (34 cultural, 7 natural, 1 mixed - Khangchendzonga National Park). Recent inclusions: Sacred Ensembles of the Hoysalas (Karnataka) and Santiniketan (West Bengal)."
+        ],
+        mnemonic: "Nagara = North (Curved Shikhara). Dravida = South (Pyramid Vimana & Gopuram). Kailash Temple = Ellora Cave 16 (monolith). Mixed UNESCO Site = Khangchendzonga."
       }
     ]
   },
