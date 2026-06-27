@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AdSenseBlock from './AdSenseBlock';
 
 export default function CurrentAffairs({ 
   currentAffairs, 
@@ -267,21 +268,7 @@ export default function CurrentAffairs({
       )}
 
       {/* Google AdSense Horizontal Banner */}
-      <div className="google-adsense-banner glass-card">
-        <div className="ad-info-bar">
-          <span className="ad-indicator">ADVERTISEMENT</span>
-          <span className="ads-by-google">Ads by Google</span>
-        </div>
-        <div className="ad-banner-content">
-          <div className="ad-text-block">
-            <h4>Targeting {selectedExam === 'All' ? 'Competitive Exams' : selectedExam} 2026?</h4>
-            <p>Get SARKARI BABU Premium Test Series. Access 10,000+ calibrated questions with high-yield explanation maps.</p>
-          </div>
-          <a href="https://google.com/adsense" target="_blank" rel="noopener noreferrer" className="ad-banner-btn">
-            Get 50% Off Now
-          </a>
-        </div>
-      </div>
+      <AdSenseBlock slotId="3000001" />
 
       {/* News Feed Grid */}
       {filteredAffairs.length > 0 ? (

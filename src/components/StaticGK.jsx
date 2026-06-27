@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AdSenseBlock from './AdSenseBlock';
 
 export default function StaticGK({ staticGK, bookmarks, onToggleBookmark }) {
   const [activeSubject, setActiveSubject] = useState(staticGK[0]?.id || '');
@@ -166,6 +167,9 @@ export default function StaticGK({ staticGK, bookmarks, onToggleBookmark }) {
           <p className="empty-subtitle">Try searching for other terms like "Writs", "Mughal", "Rivers", or "Vitamins".</p>
         </div>
       )}
+
+      {/* Google AdSense Bottom Banner */}
+      <AdSenseBlock slotId="4000001" />
     </div>
   );
 }

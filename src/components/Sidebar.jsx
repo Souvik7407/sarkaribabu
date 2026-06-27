@@ -1,4 +1,5 @@
 import React from 'react';
+import AdSenseBlock from './AdSenseBlock';
 
 export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, toggleTheme, isOpen, onClose }) {
   const menuItems = [
@@ -163,19 +164,8 @@ export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, 
         </div>
       </div>
 
-      {/* Google AdSense Sidebar Card */}
-      <div className="sidebar-ad-card glass-card">
-        <div className="ad-header">
-          <span className="ad-sponsored-tag">SPONSORED</span>
-          <span className="adsbygoogle-label">Ads by Google</span>
-        </div>
-        <div className="ad-body">
-          <h5>UPSC CSAT Complete Pack</h5>
-          <p>Master aptitude & reasoning with curated video lessons. 50% Off Today!</p>
-          <a href="https://google.com/adsense" target="_blank" rel="noopener noreferrer" className="ad-cta-btn">
-            Enroll Now
-          </a>
-        </div>
+      <div style={{ padding: '0 0.2rem' }}>
+        <AdSenseBlock slotId="1000001" />
       </div>
 
       <div className="sidebar-footer">

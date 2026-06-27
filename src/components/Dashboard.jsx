@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { initialJobOpenings, getDayTheme } from '../data/db';
 import { factsData } from '../data/facts';
+import AdSenseBlock from './AdSenseBlock';
 
 export default function Dashboard({ 
   selectedExam, 
@@ -123,6 +124,9 @@ export default function Dashboard({
           <span>Targeting: {selectedExam === 'All' ? 'All Exams' : selectedExam}</span>
         </div>
       </div>
+
+      {/* Google AdSense Horizontal Dashboard Banner */}
+      <AdSenseBlock slotId="2000001" />
 
       {/* Specialty of the Day Animated Banner */}
       <div className="specialty-day-card glass-card">
