@@ -213,38 +213,21 @@ export const staticGKData = [
     subject: "Indian Polity & Constitution",
     topics: [
       {
-        title: "Fundamental Rights (Articles 12-35)",
-        description: "Part III of the Indian Constitution is termed the Magna Carta of India. These rights are justiciable, protected, and guaranteed by the Supreme Court. They are essential for the intellectual, moral, and spiritual development of citizens and serve to establish a government of laws, not of men.",
+        title: "Historical Development & Creation of Indian Constitution",
+        description: "The constitutional history of India began under the British East India Company rule and Crown rule through various regulatory acts, culminating in the Indian Independence Act, 1947.",
         keyPoints: [
-          "Right to Equality (Articles 14-18): Equality before law (Art 14), Prohibition of discrimination (Art 15), Equality of opportunity in public employment (Art 16), Abolition of untouchability (Art 17 - absolute right), Abolition of titles (Art 18).",
-          "Right to Freedom (Articles 19-22): Article 19 guarantees six basic democratic freedoms (speech and expression, peaceful assembly, forming associations/cooperatives, free movement, residence, and practicing any profession).",
-          "Protection in respect of conviction for offenses (Article 20) and Protection of Life and Personal Liberty (Article 21) cannot be suspended even during a National Emergency under Article 352.",
-          "Right to Education (Article 21A): Declared free and compulsory education for children aged 6 to 14 years as a Fundamental Right. Inserted via the 86th Constitutional Amendment Act, 2002.",
-          "Right against Exploitation (Articles 23-24): Prohibition of human trafficking and forced labor/begar (Art 23), and prohibition of employment of children under 14 in hazardous industries (Art 24).",
-          "Right to Freedom of Religion (Articles 25-28): Freedom of conscience, free profession, practice, and propagation of religion (Art 25), freedom to manage religious affairs (Art 26).",
-          "Cultural and Educational Rights (Articles 29-30): Protection of interests of minorities (Art 29), right of minorities to establish and administer educational institutions (Art 30).",
-          "Right to Constitutional Remedies (Article 32): Empowers citizens to directly petition the Supreme Court. Dr. B.R. Ambedkar called it the 'Heart and Soul' of the Constitution. Courts issue five types of writs: Habeas Corpus, Mandamus, Prohibition, Certiorari, and Quo-Warranto."
+          "Regulating Act 1773: Designated the Governor of Bengal as the 'Governor-General of Bengal' (Warren Hastings) and established the Supreme Court at Calcutta (1774).",
+          "Pitts India Act 1784: Distinguished between the commercial and political functions of the Company, establishing a dual system of control (Court of Directors and Board of Control).",
+          "Charter Act 1833: Made the Governor-General of Bengal the 'Governor-General of India' (William Bentinck), centralization reached its peak, and the company's commercial activities ended.",
+          "Government of India Act 1858: Enacted after the 1857 Mutiny; transferred power from the Company to the British Crown. Abolished Board of Control and Court of Directors, creating the office of Secretary of State for India.",
+          "Indian Councils Act 1909 (Morley-Minto Reforms): Introduced separate electorates for Muslims, legalizing communalism (Lord Minto is called the Father of Communal Electorates).",
+          "Government of India Act 1919 (Montagu-Chelmsford Reforms): Introduced 'Dyarchy' (dual rule) in provincial subjects (Transferred and Reserved). Introduced bicameralism and direct elections.",
+          "Government of India Act 1935: Provided for the establishment of an All-India Federation and provincial autonomy. Abolished dyarchy in provinces and introduced it at the Centre."
         ],
-        mnemonic: "Borrowed from US Bill of Rights. Remember: Writs are discretionary remedies under Art 226 for High Courts (which has a wider writ jurisdiction than SC under Art 32 because High Courts can issue them for non-FR rights too)."
+        mnemonic: "1909 = Morley-Minto (Separate Electorates). 1919 = Montagu-Chelmsford (Provincial Dyarchy). 1935 = Federal scheme (Provincial autonomy)."
       },
       {
-        title: "Schedules of the Indian Constitution",
-        description: "Schedules are additional tables that categorize and tabulate bureaucratic details, administrative policies, and lists not found in the main articles. Originally there were 8, now there are 12.",
-        keyPoints: [
-          "Schedule 1: Names of the States and Union Territories along with their territorial jurisdictions.",
-          "Schedule 2: Emoluments, allowances, privileges, and salaries of the President, Governors, Speaker/Deputy Speaker of Lok Sabha/State Assemblies, and Judges of SC/HC and CAG.",
-          "Schedule 3: Forms of Oaths and Affirmations for Union Ministers, MPs, MLAs, and SC/HC Judges (President's oath is under Art 60, not here).",
-          "Schedule 4: Allocation of seats in the Rajya Sabha (Council of States) to the States and Union Territories based on population.",
-          "Schedule 8: List of 22 officially recognized languages. Originally 14. 21st Amendment added Sindhi (1967). 71st Amendment added Konkani, Manipuri, Nepali (1992). 92nd Amendment added Bodo, Dogri, Maithili, Santhali (2003). English and Rajasthani are NOT in the 8th Schedule.",
-          "Schedule 9: Acts and regulations of state legislatures dealing with land reforms and abolition of the Zamindari system. Protected from judicial review originally, but the SC ruled in the I.R. Coelho Case (2007) that laws placed here after April 24, 1973 (Kesavananda case date) are open to judicial review if they violate basic structure.",
-          "Schedule 10: Anti-Defection Law provisions. Added by the 52nd Amendment Act in 1985 to prevent political opportunism ('Aya Ram Gaya Ram').",
-          "Schedule 11: Powers, authority, and responsibilities of Panchayats. Contains 29 functional matters. Added by the 73rd Amendment Act in 1992.",
-          "Schedule 12: Powers, authority, and responsibilities of Municipalities. Contains 18 functional matters. Added by the 74th Amendment Act in 1992."
-        ],
-        mnemonic: "Use 'TEARS OF OLD PM': T-Territories (1), E-Emoluments (2), A-Affirmations (3), R-Rajya Sabha (4), S-Scheduled Areas (5), O-Other Scheduled Areas (6), F-Federal Structure (7), O-Official Languages (8), L-Land Reforms (9), D-Defection (10), P-Panchayats (11), M-Municipalities (12)."
-      },
-      {
-        title: "Sources of the Indian Constitution",
+        title: "Various Sources of Indian Constitution",
         description: "The Indian Constitution was drafted after ransacking all the known constitutions of the world. It combines structural, political, and philosophical provisions to create a document unique to India's diverse requirements.",
         keyPoints: [
           "Government of India Act 1935: Provided the administrative blueprint. Federal scheme, Office of Governor, Judiciary, Public Service Commissions, Emergency provisions, and administrative details (about 60% of the text is derived from this Act).",
@@ -262,21 +245,17 @@ export const staticGKData = [
         mnemonic: "Memorization trick: UK = Parliament & Laws; US = Judges & Rights; Ireland = Nominated Members & DPSPs; Canada = Strong Centre; USSR = Duties; Germany = Suspended Rights."
       },
       {
-        title: "Key Constitutional Amendments",
-        description: "Under Article 368, Parliament has the power to amend the Constitution, subject to the 'Basic Structure' doctrine established in 1973. Amendments ensure the Constitution remains a living document that adapts to changing societal needs.",
+        title: "Indian Constituent Assembly and its Features",
+        description: "The Constituent Assembly was constituted in November 1946 under the Cabinet Mission Plan to draft the Constitution of India.",
         keyPoints: [
-          "1st Amendment (1951): Added the 9th Schedule to protect land reform laws from judicial review on the grounds of violating fundamental rights. Restated freedom of speech and expression by adding reasonable restrictions.",
-          "7th Amendment (1956): Reorganized states on a linguistic basis. Abolished the classification of states into Parts A, B, C, and D. Introduced the provision for a common High Court for two or more states.",
-          "42nd Amendment (1976): The 'Mini-Constitution' passed during Emergency. Added 'Socialist', 'Secular', and 'Integrity' to the Preamble. Inserted Part IV-A (Fundamental Duties) and Part XIV-A (Administrative Tribunals). Reduced judicial review powers of High Courts.",
-          "44th Amendment (1978): Reverted many changes of the 42nd Amendment. Replaced 'internal disturbance' with 'armed rebellion' for declaring National Emergency. Removed the Right to Property (Art 31) from the list of Fundamental Rights, making it a legal right under Art 300A. Ruled that Articles 20 & 21 cannot be suspended during National Emergency.",
-          "86th Amendment (2002): Made free and compulsory education a Fundamental Right for children aged 6 to 14 under Article 21A. Added a new Fundamental Duty under Article 51A(k) and amended DPSP Article 45.",
-          "91st Amendment (2003): Limited the size of the Council of Ministers (including the PM) to 15% of the total strength of the Lok Sabha (and legislative assemblies). Strengthened the Anti-Defection Law (split of 1/3rd no longer a defense).",
-          "101st Amendment (2016): Introduced the Goods and Services Tax (GST) across India, inserting Article 246A, 269A, and 279A (GST Council).",
-          "103rd Amendment (2019): Provided a maximum of 10% reservation for Economically Weaker Sections (EWS) of citizens in jobs and educational admissions, inserting Articles 15(6) and 16(6).",
-          "104th Amendment (2020): Extended reservation of seats for SCs and STs in the Lok Sabha and State Assemblies for 10 years, and abolished the reservation of 2 nominated seats for the Anglo-Indian community.",
-          "106th Amendment (2023): 'Nari Shakti Vandan Adhiniyam'. Allocates 33% reservation for women in the Lok Sabha, Delhi Legislative Assembly, and State Legislative Assemblies for 15 years."
+          "Composition: Total strength was 389, reduced to 299 after Partition. Members were elected indirectly by provincial assemblies and nominated by princely states.",
+          "First Meeting: Held on December 9, 1946. Dr. Sachchidananda Sinha was elected temporary President as the oldest member (French practice).",
+          "President & Vice-Presidents: On December 11, 1946, Dr. Rajendra Prasad was elected permanent President. H.C. Mukherjee and V.T. Krishnamachari were Vice-Presidents. Sir B.N. Rau was the Constitutional Advisor.",
+          "Objective Resolution: Moved by Jawaharlal Nehru on December 13, 1946. Adopted on January 22, 1947, later becoming the Preamble.",
+          "Drafting Committee: Set up on August 29, 1947, under the chairmanship of Dr. B.R. Ambedkar. Had 7 members.",
+          "Timeline: Took 2 years, 11 months, and 18 days to complete. Adopted on November 26, 1949; final session held on January 24, 1950."
         ],
-        mnemonic: "42nd (1976) = Added rigidity/centralization; 44th (1978) = Restored democratic balance. 4+2=6 (1976), 4+4=8 (1978). 101st = GST (One Nation One Tax), 103rd = EWS, 104th = Anglo-Indians gone, 106th = Women."
+        mnemonic: "First temporary President = Sinha. Permanent = Prasad. Advisor = B.N. Rau. Chairman of Drafting Committee = Ambedkar. Time = ~3 years."
       },
       {
         title: "Preamble to the Constitution",
@@ -293,35 +272,114 @@ export const staticGKData = [
         mnemonic: "Order of key adjectives: Sovereign, Socialist, Secular, Democratic, Republic (S-S-S-D-R). Amended only ONCE in 1976 by the 42nd Amendment, adding three words: Socialist, Secular, and Integrity."
       },
       {
-        title: "DPSP (Articles 36-51) & Fundamental Duties (Article 51A)",
-        description: "Directive Principles of State Policy (Part IV) are non-justiciable guidelines for the State to establish social and economic democracy. Fundamental Duties (Part IV-A) are moral obligations of citizens to foster patriotism and civic responsibility.",
+        title: "The Union & its Territories (Articles 1-4)",
+        description: "Part I deals with the territory of India, admission or establishment of new states, and boundary changes.",
         keyPoints: [
-          "DPSPs are non-justiciable (Article 37), meaning they cannot be enforced by courts, but are fundamental in the governance of the country. Borrowed from the Irish Constitution.",
+          "Article 1: Declares India, that is Bharat, as a 'Union of States' rather than a 'Federation of States', indicating states have no right to secede.",
+          "Article 2: Empowers Parliament to admit into the Union or establish new states (that are not part of India currently, e.g., Sikkim via 36th Amendment, 1975).",
+          "Article 3: Empowers Parliament to form new states, alter areas, boundaries, or names of existing states (requires simple majority; presidential recommendation; state legislature views are sought but not binding).",
+          "Dhar Commission & JVP Committee (1948): Rejected linguistic basis for state reorganization, favoring administrative convenience.",
+          "Fazl Ali Commission (1953): Accepted linguistic basis. Led to the State Reorganisation Act, 1956, creating 14 states and 6 UTs."
+        ],
+        mnemonic: "Article 1 = Union of States. Article 2 = External states (admission). Article 3 = Internal states (creation/names). First linguistic state = Andhra Pradesh (1953)."
+      },
+      {
+        title: "Citizenship (Articles 5-11)",
+        description: "Part II of the Constitution outlines single citizenship rules at the commencement of the Constitution, leaving legislative power to Parliament.",
+        keyPoints: [
+          "Single Citizenship: India offers single citizenship to foster national integration (unlike US double citizenship).",
+          "Article 11: Empowers Parliament exclusively to regulate the right of citizenship (implemented via Citizenship Act, 1955).",
+          "Acquisition: Under Citizenship Act 1955, citizenship can be acquired by: 1) Birth, 2) Descent, 3) Registration, 4) Naturalisation, 5) Incorporation of Territory.",
+          "Loss: Citizenship can be lost by: 1) Renunciation (voluntary giving up), 2) Termination (acquiring another country's citizenship), 3) Deprivation (compulsory termination by govt due to fraud, disloyalty).",
+          "OCI (Overseas Citizen of India): Card scheme introduced in 2005 for Persons of Indian Origin (PIOs) of foreign nationality, excluding citizens of Pakistan and Bangladesh."
+        ],
+        mnemonic: "Acquisition = BRAND (Birth, Registration, Association/Incorporation, Naturalisation, Descent). Loss = TDR (Termination, Deprivation, Renunciation)."
+      },
+      {
+        title: "Fundamental Rights (Articles 12-35)",
+        description: "Part III of the Indian Constitution is termed the Magna Carta of India. These rights are justiciable, protected, and guaranteed by the Supreme Court. They are essential for the intellectual, moral, and spiritual development of citizens and serve to establish a government of laws, not of men.",
+        keyPoints: [
+          "Right to Equality (Articles 14-18): Equality before law (Art 14), Prohibition of discrimination (Art 15), Equality of opportunity in public employment (Art 16), Abolition of untouchability (Art 17 - absolute right), Abolition of titles (Art 18).",
+          "Right to Freedom (Articles 19-22): Article 19 guarantees six basic democratic freedoms (speech and expression, peaceful assembly, forming associations/cooperatives, free movement, residence, and practicing any profession).",
+          "Protection in respect of conviction for offenses (Article 20) and Protection of Life and Personal Liberty (Article 21) cannot be suspended even during a National Emergency under Article 352.",
+          "Right to Education (Article 21A): Declared free and compulsory education for children aged 6 to 14 years as a Fundamental Right. Inserted via the 86th Constitutional Amendment Act, 2002.",
+          "Right against Exploitation (Articles 23-24): Prohibition of human trafficking and forced labor/begar (Art 23), and prohibition of employment of children under 14 in hazardous industries (Art 24).",
+          "Right to Freedom of Religion (Articles 25-28): Freedom of conscience, free profession, practice, and propagation of religion (Art 25), freedom to manage religious affairs (Art 26).",
+          "Cultural and Educational Rights (Articles 29-30): Protection of interests of minorities (Art 29), right of minorities to establish and administer educational institutions (Art 30).",
+          "Right to Constitutional Remedies (Article 32): Empowers citizens to directly petition the Supreme Court. Dr. B.R. Ambedkar called it the 'Heart and Soul' of the Constitution. Courts issue five types of writs: Habeas Corpus, Mandamus, Prohibition, Certiorari, and Quo-Warranto."
+        ],
+        mnemonic: "Borrowed from US Bill of Rights. Remember: Writs are discretionary remedies under Art 226 for High Courts (which has a wider writ jurisdiction than SC under Art 32 because High Courts can issue them for non-FR rights too)."
+      },
+      {
+        title: "Directive Principles of State Policy (Articles 36-51)",
+        description: "Directive Principles of State Policy (Part IV) are non-justiciable guidelines for the State to establish social and economic democracy, aiming to establish a welfare state.",
+        keyPoints: [
+          "Nature: Non-justiciable (Article 37), meaning they cannot be enforced by courts, but are fundamental in the governance of the country. Borrowed from the Irish Constitution.",
           "Classification of DPSPs: 1) Socialistic (Art 38, 39, 39A, 41, 42, 43, 43A, 47), 2) Gandhian (Art 40 - Village Panchayats, Art 43 - Cottage industries, Art 46 - SC/ST welfare, Art 47 - Prohibition of liquor, Art 48 - Prohibition of slaughter of cows), 3) Liberal-Intellectual (Art 44 - Uniform Civil Code, Art 45 - Early childhood care, Art 48A - Environment protection, Art 49 - Monument protection, Art 50 - Separation of Judiciary from Executive, Art 51 - International peace).",
           "Uniform Civil Code (Article 44): Directs the State to secure a Uniform Civil Code for all citizens throughout India. Currently, Goa is the only Indian state with a common family law (Portuguese Civil Code), and Uttarakhand recently passed its own UCC law.",
+          "Equal Justice and Free Legal Aid (Article 39A): Directs the state to provide free legal aid to the poor, added via the 42nd Amendment Act in 1976."
+        ],
+        mnemonic: "DPSPs = Socio-economic democracy. Fundamental Rights = Political democracy. Article 50 = Separation of Powers (50-50 split between Executive and Judiciary)."
+      },
+      {
+        title: "Fundamental Duties (Article 51A)",
+        description: "Fundamental Duties (Part IV-A) are moral obligations of citizens to foster patriotism and civic responsibility, serving as a reminder of their duties to the nation.",
+        keyPoints: [
           "Original scope of Duties: Not part of the original Constitution. Added by the 42nd Amendment Act (1976) on the recommendation of the Swaran Singh Committee during Emergency. Borrowed from the USSR Constitution.",
           "Number of Duties: Originally 10 duties were added in 1976. The 11th duty was added by the 86th Amendment Act in 2002, which obligates parents/guardians to provide education opportunities to children aged 6 to 14.",
-          "Verma Committee (1999): Identified the existence of legal provisions for the implementation of some of the Fundamental Duties (e.g., Prevention of Insults to National Honour Act, Wildlife Protection Act)."
+          "Features: Non-justiciable, meaning no direct legal punishment for non-performance unless backed by specific laws (like Wildlife Act). Apply only to citizens, not foreigners."
         ],
-        mnemonic: "DPSPs = Socio-economic democracy (welfare state). Fundamental Rights = Political democracy. Article 50 = Separation of Powers (50-50 split between Executive and Judiciary)."
+        mnemonic: "Part IV-A / Article 51A. 10 duties in 1976 + 1 duty in 2002 = 11 duties total."
       },
       {
-        title: "President of India & Emergency Provisions",
-        description: "The President is the executive head of the State, first citizen, and supreme commander of the armed forces. Emergency provisions (Part XVIII) outline how the federal structure can transform into a unitary system to protect national sovereignty.",
+        title: "The Union Executive & Parliament (Articles 52-151)",
+        description: "Part V of the Constitution covers the President, Vice-President, Prime Minister, Council of Ministers, Attorney General of India, Parliament, and CAG.",
         keyPoints: [
-          "Electoral College (Article 54): The President is elected indirectly by an electoral college consisting of: 1) Elected members of both Houses of Parliament (MPs), 2) Elected members of Legislative Assemblies of States (MLAs), 3) Elected members of Delhi and Puducherry assemblies. Nominated members do NOT participate.",
-          "Impeachment (Article 61): Impeachment is a quasi-judicial process initiated in either House of Parliament for 'violation of the Constitution'. Requires a resolution passed by a majority of not less than two-thirds of the total membership of the House.",
-          "Executive and Legislative Powers: Appoints the Prime Minister, CAG, Attorney General, and Governors. Promulgates Ordinances (Article 123) when Parliament is not in session (valid for max 6 months and 6 weeks). Can summon a Joint Sitting of Parliament (Article 108).",
-          "Pardoning Power (Article 72): Can grant pardons, reprieves, respites, remissions, or commutations of punishment (including court-martial and death sentences). Unlike Governors, the President has exclusive power to pardon death sentences.",
-          "National Emergency (Article 352): Declared on grounds of war, external aggression, or 'armed rebellion' (replaced 'internal disturbance' in 1978). Approved by Parliament within 1 month by a special majority. Suspends Article 19 automatically (under Art 358) only in external emergencies. Articles 20 and 21 can never be suspended (Art 359).",
-          "President's Rule / State Emergency (Article 356 & 365): Declared when a state government cannot carry on in accordance with the Constitution, or fails to comply with Union directives. Approved by Parliament within 2 months by a simple majority. No effect on Fundamental Rights.",
-          "Financial Emergency (Article 360): Declared if the financial stability or credit of India is threatened. Approved within 2 months by a simple majority. Has never been declared in India so far."
+          "President (Art 52-62): Executive head of State. Elected by elected MPs & MLAs. Impeached (Art 61) by 2/3rd total strength. Promulgates ordinances (Art 123).",
+          "PM & Council of Ministers: PM appointed by President. Council is collectively responsible to Lok Sabha (Art 75).",
+          "Parliament: Bicameral (Lok Sabha - House of People, max 550; Rajya Sabha - Council of States, max 250). Joint sitting (Art 108) summoned by President, presided by LS Speaker.",
+          "Money Bill (Art 110): Introduced only in Lok Sabha with President's recommendation. LS Speaker certifies it.",
+          "CAG (Art 148): Audits government receipts/expenditures. Term: 6 years or 65 years. Guardian of the public purse."
         ],
-        mnemonic: "Emergency articles go up by 4: 352 (National) -> 356 (State/President's Rule) -> 360 (Financial). Remember: Ordinance power is 123 (President) vs 213 (Governor)."
+        mnemonic: "Money Bill = Article 110. Joint Sitting = Article 108. Ordinance = Article 123. CAG = Article 148."
       },
       {
-        title: "Panchayati Raj & Municipalities (73rd & 74th Amendments)",
-        description: "Local self-government in India was constitutionalized in 1992 to decentralize administration down to the village level. It fulfills the Gandhian vision of Gram Swaraj.",
+        title: "State Executive & Legislature (Articles 152-237)",
+        description: "Part VI covers Governor, Chief Minister, Council of Ministers, Advocate General, and State Legislatures.",
+        keyPoints: [
+          "Governor (Art 153-162): Appointed by the President. Holds office during the pleasure of the President. Promulgates state ordinances under Article 213.",
+          "Chief Minister: Real executive head of the state, appointed by the Governor (Art 164).",
+          "Advocate General (Art 165): Highest law officer of the state (equivalent to Attorney General at Centre).",
+          "State Legislature: Can be Unicameral (Vidhan Sabha) or Bicameral (Vidhan Sabha + Vidhan Parishad). Currently only 6 states have a Legislative Council.",
+          "Council Abolition/Creation (Art 169): Parliament can create or abolish a Legislative Council if the State Assembly passes a resolution by special majority."
+        ],
+        mnemonic: "Ordinance: President = 123, Governor = 213. Bicameral States: KUMBAT (Karnataka, UP, Maharashtra, Bihar, Andhra Pradesh, Telangana)."
+      },
+      {
+        title: "The Judiciary (Articles 124-147 & 214-237)",
+        description: "India has an integrated, independent judicial system with the Supreme Court at the apex, followed by High Courts and Subordinate Courts.",
+        keyPoints: [
+          "Supreme Court (Art 124): 34 judges (including CJI) appointed by the President under the Collegium System. Retires at 65.",
+          "SC Jurisdictions: Original (Art 131 - Center-State disputes), Advisory (Art 143 - Presidential reference, not binding), Court of Record (Art 129).",
+          "High Courts (Art 214): Currently 25 High Courts in India. Judges appointed by President, retire at 62.",
+          "Writ Jurisdiction: SC under Article 32 (only for FRs); HC under Article 226 (for FRs and legal rights; wider scope than SC)."
+        ],
+        mnemonic: "SC Advisory = Article 143. SC Court of Record = 129. HC Writ = Article 226."
+      },
+      {
+        title: "Official Language (Articles 343-351)",
+        description: "Part XVII outlines the official language of the Union, regional languages, and the language of the Supreme Court and High Courts.",
+        keyPoints: [
+          "Union Official Language (Art 343): Hindi in Devanagari script is the official language of the Union. English is used as an associate official language.",
+          "Supreme Court & HC Language (Art 348): All proceedings in the Supreme Court and every High Court shall be in the English language until Parliament provides otherwise.",
+          "Article 351: Directs the Union to promote the spread and development of the Hindi language.",
+          "Classical Languages: Currently 6 languages have Classical status: Tamil (2004), Sanskrit (2005), Telugu (2008), Kannada (2008), Malayalam (2013), and Odia (2014)."
+        ],
+        mnemonic: "Hindi development = Art 351. SC/HC proceedings = English (Art 348). 6 Classical Languages: Tamil (first) and Odia (last)."
+      },
+      {
+        title: "Self-Government (Panchayats & Municipalities)",
+        description: "Local self-government in India was constitutionalized in 1992 to decentralize administration down to the village and urban ward level, fulfilling the Gandhian vision of Gram Swaraj.",
         keyPoints: [
           "Historical Development: Balwant Rai Mehta Committee (1957) recommended a 3-tier Panchayati Raj system. Rajasthan was the first state to establish it in Nagaur district on October 2, 1959. Ashok Mehta Committee (1977) recommended a 2-tier system. L.M. Singhvi Committee (1986) recommended constitutional status.",
           "73rd Amendment Act (1992): Added Part IX and the 11th Schedule (29 matters). Established a three-tier system: Gram Panchayat (village level), Panchayat Samiti (block level), and Zilla Parishad (district level).",
@@ -332,18 +390,57 @@ export const staticGKData = [
         mnemonic: "Chronology of committees: 'B-A-G-S' (Balwant Rai, Ashok Mehta, G.V.K. Rao, L.M. Singhvi). Remember: Gram Sabha consists of all registered voters in the village, not just all residents."
       },
       {
-        title: "Key Constitutional & Statutory Bodies",
-        description: "Constitutional bodies are established by the Constitution itself and require a constitutional amendment to change. Statutory bodies are created by an Act of Parliament and can be amended or abolished by passing a normal bill.",
+        title: "Constitutional Amendment (Article 368)",
+        description: "Under Article 368, Parliament has the power to amend the Constitution, balancing flexibility and rigidity, subject to the 'Basic Structure' doctrine.",
         keyPoints: [
-          "Election Commission of India (Article 324): Consists of a Chief Election Commissioner (CEC) and other Commissioners (currently three-member body). Conducts elections for Parliament, State Legislatures, President, and Vice-President. Municipal/Panchayat elections are conducted by the State Election Commission.",
-          "Comptroller and Auditor General (CAG) of India (Article 148): Audits all receipts and expenditures of the Government of India and the States. Term: 6 years or 65 years of age. Acts as the guardian of the public purse. Dr. B.R. Ambedkar called it the most important office under the Constitution.",
-          "Finance Commission (Article 280): Quasi-judicial body constituted by the President every 5 years. Recommends the distribution of tax revenues between the Union and the States (vertical devolution) and among the States (horizontal devolution). The 16th Finance Commission is chaired by Dr. Arvind Panagariya.",
-          "Attorney General of India (Article 76): Highest law officer in the country. Appointed by the President and holds office during the pleasure of the President. Has the right of audience in all courts in India and can participate in parliamentary proceedings without the right to vote.",
-          "Union Public Service Commission (UPSC) (Articles 315-323): Independent recruiting agency for all-India services and central services Group A & B. Members appointed by the President for a term of 6 years or 65 years.",
-          "National Human Rights Commission (NHRC): Statutory body established in 1993 under the Protection of Human Rights Act. Chaired by a retired Chief Justice of India or a Supreme Court Judge.",
-          "National Green Tribunal (NGT): Statutory body established in 2010 under the NGT Act for expeditious disposal of environmental disputes. Headquartered in New Delhi."
+          "Types of Amendment: 1) Simple Majority (outside Art 368, e.g., creation of states, citizenship), 2) Special Majority of Parliament (under Art 368, requires 2/3rd present & voting and 50% of total strength), 3) Special Majority + ratification by half of the states (for federal features, e.g., GST).",
+          "Limitations: Parliament cannot amend the 'Basic Structure' of the Constitution (established in Kesavananda Bharati case, 1973).",
+          "Key Features: No provision for a joint sitting for constitutional amendment bills. President must give assent (cannot veto/return it)."
         ],
-        mnemonic: "Constitutional = Articles: CAG (148), Attorney General (76), Finance Commission (280), Election Commission (324), UPSC (315). Statutory = Acts: NHRC (1993), NGT (2010), SEBI (1992)."
+        mnemonic: "Article 368 = Amendment. Basic Structure cannot be touched (Kesavananda, 1973). Joint sitting is NOT allowed."
+      },
+      {
+        title: "Constitutional Bodies",
+        description: "Constitutional bodies are established by the Constitution itself and require a constitutional amendment to change.",
+        keyPoints: [
+          "Election Commission of India (Article 324): Consists of a Chief Election Commissioner (CEC) and other Commissioners. Conducts elections for Parliament, State Legislatures, President, and Vice-President.",
+          "Comptroller and Auditor General (CAG) of India (Article 148): Audits all receipts and expenditures of the Government of India and the States. Term: 6 years or 65 years. Acts as the guardian of the public purse.",
+          "Finance Commission (Article 280): Quasi-judicial body constituted by the President every 5 years. Recommends the distribution of tax revenues between the Union and the States.",
+          "Attorney General of India (Article 76): Highest law officer in the country. Appointed by the President and holds office during the pleasure of the President.",
+          "Union Public Service Commission (UPSC) (Articles 315-323): Independent recruiting agency for all-India services and central services Group A & B."
+        ],
+        mnemonic: "Constitutional = Articles: CAG (148), Attorney General (76), Finance Commission (280), Election Commission (324), UPSC (315)."
+      },
+      {
+        title: "Non-Constitutional / Statutory & Executive Bodies",
+        description: "Bodies created by an Act of Parliament (Statutory) or by an executive resolution (Executive), which do not require constitutional amendments to change.",
+        keyPoints: [
+          "NITI Aayog: An executive body established on Jan 1, 2015, replacing the Planning Commission. Chaired by the Prime Minister. Works as a policy think-tank.",
+          "National Human Rights Commission (NHRC): Statutory body created under the Protection of Human Rights Act, 1993, to safeguard human rights.",
+          "Central Information Commission (CIC) & Central Vigilance Commission (CVC): Statutory panels overseeing transparency and anti-corruption.",
+          "National Green Tribunal (NGT): Statutory body created in 2010 under the NGT Act for environmental justice."
+        ],
+        mnemonic: "NITI Aayog = Executive (no Act, no Article). NHRC, NGT, SEBI, Lokpal = Statutory (created by Acts of Parliament)."
+      },
+      {
+        title: "Important Parts, Articles and Schedules",
+        description: "Schedules, Parts, and Articles categorize and tabulate bureaucratic details, administrative policies, and lists within the Constitution.",
+        keyPoints: [
+          "Schedules: Originally there were 8, now there are 12. Schedule 8 (Official Languages), Schedule 9 (Land Reforms), Schedule 10 (Anti-Defection Law), Schedule 11 (Panchayats), Schedule 12 (Municipalities).",
+          "Parts: Originally 22 parts, now 25 parts. Key Parts: Part I (Union), Part II (Citizenship), Part III (FRs), Part IV (DPSP), Part IV-A (Duties), Part V (Union), Part VI (States), Part IX (Panchayats), Part XV (Elections), Part XVIII (Emergency), Part XX (Amendment).",
+          "Key Articles: Art 14 (Equality), Art 17 (Untouchability), Art 21 (Life), Art 32 (Remedies), Art 44 (UCC), Art 51A (Duties), Art 72 (Pardoning), Art 76 (AG), Art 110 (Money Bill), Art 280 (Finance), Art 324 (Election), Art 352/356/360 (Emergency), Art 368 (Amendment)."
+        ],
+        mnemonic: "Use 'TEARS OF OLD PM': T-Territories (1), E-Emoluments (2), A-Affirmations (3), R-Rajya Sabha (4), S-Scheduled Areas (5), O-Other Scheduled Areas (6), F-Federal Structure (7), O-Official Languages (8), L-Land Reforms (9), D-Defection (10), P-Panchayats (11), M-Municipalities (12)."
+      },
+      {
+        title: "Miscellaneous Polity Concepts",
+        description: "Additional foundational topics including Federal vs. Unitary features of the Constitution, Special Provisions for States, and PIL frameworks.",
+        keyPoints: [
+          "Federal vs Unitary: Indian Constitution is 'Quasi-federal' (K.C. Wheare) or 'Federal with a unitary bias'. Federal features: Written constitution, dual polity, division of powers, independent judiciary. Unitary features: Strong Centre, single citizenship, single integrated judiciary, emergency provisions, appointment of Governors.",
+          "Special Provisions (Articles 371-371J): Part XXI contains special temporary and transitional provisions for states like Maharashtra & Gujarat (371), Nagaland (371A), Assam (371B), Andhra Pradesh (371D), Sikkim (371F), and Karnataka (371J).",
+          "Public Interest Litigation (PIL): Introduced in India by Justice P.N. Bhagwati and Justice V.R. Krishna Iyer in the early 1980s. Allows any citizen or group to file a petition on behalf of marginalized communities."
+        ],
+        mnemonic: "Quasi-federal = Wheare. PIL = Bhagwati. Article 371 = Special provisions for Maharashtra/Gujarat. 371A = Nagaland. 371J = Karnataka."
       }
     ]
   },
