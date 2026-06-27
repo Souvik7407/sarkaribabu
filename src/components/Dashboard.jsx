@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { initialJobOpenings, getDayTheme } from '../data/db';
+import { factsData } from '../data/facts';
 
 export default function Dashboard({ 
   selectedExam, 
@@ -69,11 +70,27 @@ export default function Dashboard({
     }
   };
 
-  const dailyFact = {
+  // Get unique daily fact from the 1000 facts database
+  const getDailyFact = () => {
+    if (!factsData || factsData.length === 0) return null;
+    const now = new Date();
+    const oneDay = 1000 * 60 * 60 * 24;
+    const epochMs = now.getTime() - now.getTimezoneOffset() * 60000;
+    const dayIndex = Math.floor(epochMs / oneDay);
+    const index = dayIndex % factsData.length;
+    return factsData[index];
+  };
+
+  const dailyFact = getDailyFact() || {
     title: "Mnemonic of the Day (Polity)",
     content: "Remember the 12 Schedules of the Indian Constitution with the phrase 'TEARS OF OLD PM'.",
     breakdown: "T - Territories, E - Emoluments, A - Affirmations, R - Rajya Sabha, S - Scheduled Areas, O - Other Scheduled Areas, F - Federal Structure, O - Official Languages, L - Land Reforms, D - Defection, P - Panchayats, M - Municipalities."
   };
+
+  // Reset breakdown expansion when the daily fact changes
+  React.useEffect(() => {
+    setShowFactInfo(false);
+  }, [dailyFact?.title]);
 
   return (
     <div className="dashboard-container">
