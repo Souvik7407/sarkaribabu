@@ -9,6 +9,7 @@ import Bookmarks from './components/Bookmarks';
 import Criteria from './components/Criteria';
 import AudioPlayer from './components/AudioPlayer';
 import AITutor from './components/AITutor';
+import BuyMaterial from './components/BuyMaterial';
 
 // Import curated database
 import { initialCurrentAffairs, staticGKData, initialQuizzes, generateDailyNewsForDate, examCriteriaData } from './data/db';
@@ -499,6 +500,10 @@ export default function App() {
         return (
           <AITutor />
         );
+      case 'buy-material':
+        return (
+          <BuyMaterial />
+        );
       default:
         return <div>Tab not found</div>;
     }
@@ -578,6 +583,7 @@ export default function App() {
                   <li><a href="#one-liners" onClick={(e) => { e.preventDefault(); setActiveTab('one-liners'); }}>Fast One-Liners</a></li>
                   <li><a href="#static-gk" onClick={(e) => { e.preventDefault(); setActiveTab('static-gk'); }}>Static GK Syllabus</a></li>
                   <li><a href="#criteria" onClick={(e) => { e.preventDefault(); setActiveTab('criteria'); }}>Exam Criteria</a></li>
+                  <li><a href="#buy-material" onClick={(e) => { e.preventDefault(); setActiveTab('buy-material'); }}>Buy Study Material</a></li>
                 </ul>
               </div>
               
