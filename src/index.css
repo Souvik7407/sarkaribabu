@@ -498,8 +498,31 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.sidebar-link-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+
 .sidebar-link-text {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1.2;
+}
+
+.sidebar-coming-soon-text {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+}
+
+.sidebar-link:hover .sidebar-coming-soon-text {
+  transform: translateX(5px);
 }
 
 .sidebar-link:hover {

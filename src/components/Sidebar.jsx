@@ -115,7 +115,12 @@ export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, 
               onClick={() => { setActiveTab(item.id); onClose(); }}
             >
               <span className="sidebar-link-icon">{item.icon}</span>
-              <span className="sidebar-link-text">{item.label}</span>
+              <div className="sidebar-link-text-group">
+                <span className="sidebar-link-text">{item.label}</span>
+                {item.id === 'quiz-zone' && (
+                  <span className="sidebar-coming-soon-text">Coming Soon</span>
+                )}
+              </div>
               {item.id === 'ai-tutor' && (
                 <span className="ai-badge-live">LIVE</span>
               )}
