@@ -22,6 +22,116 @@ export default function ExamTools() {
   const [examType, setExamType] = useState('UPSC'); // 'UPSC', 'SSC-CGL', 'IBPS-PO'
   const [eligibilityResult, setEligibilityResult] = useState(null);
 
+  // --- Photo & Signature Merger State ---
+  const [photoFile, setPhotoFile] = useState(null);
+  const [sigFile, setSigFile] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [sigPreview, setSigPreview] = useState(null);
+  const [canvasWidth, setCanvasWidth] = useState(350);
+  const [canvasPhotoHeight, setCanvasPhotoHeight] = useState(350);
+  const [canvasSigHeight, setCanvasSigHeight] = useState(100);
+  const [gapSize, setGapSize] = useState(10);
+  const [bgColor, setBgColor] = useState('#FFFFFF');
+  const canvasRef = useRef(null);
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setPhotoFile(file);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setPhotoPreview(event.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSigUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setSigFile(file);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setSigPreview(event.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleClearPhoto = () => {
+    setPhotoFile(null);
+    setPhotoPreview(null);
+  };
+
+  const handleClearSig = () => {
+    setSigFile(null);
+    setSigPreview(null);
+  };
+
+  const handleDownloadMerged = () => {
+    const canvas = canvasRef.current;
+    if (!canvas || !photoPreview) {
+      alert("Please upload at least the photograph to download.");
+      return;
+    }
+    const link = document.createElement('a');
+    link.download = 'merged_photo_signature.jpg';
+    link.href = canvas.toDataURL('image/jpeg', 0.9);
+    link.click();
+  };
+
+  const drawMergedCanvas = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const totalHeight = canvasPhotoHeight + canvasSigHeight + gapSize;
+    canvas.width = canvasWidth;
+    canvas.height = totalHeight;
+
+    // Clear and set background
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvasWidth, totalHeight);
+
+    const loadAndDrawImage = (src, x, y, w, h, fallbackText) => {
+      return new Promise((resolve) => {
+        if (!src) {
+          // Draw placeholder
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.15)';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(5, y + 5, w - 10, h - 10);
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+          ctx.font = '12px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(fallbackText, w / 2, y + (h / 2));
+          resolve();
+          return;
+        }
+
+        const img = new Image();
+        img.onload = () => {
+          ctx.drawImage(img, 0, y, w, h);
+          resolve();
+        };
+        img.onerror = () => {
+          resolve();
+        };
+        img.src = src;
+      });
+    };
+
+    Promise.all([
+      loadAndDrawImage(photoPreview, 0, 0, canvasWidth, canvasPhotoHeight, "Photograph Area (Upload photo)"),
+      loadAndDrawImage(sigPreview, 0, canvasPhotoHeight + gapSize, canvasWidth, canvasSigHeight, "Signature Area (Upload signature)")
+    ]);
+  };
+
+  useEffect(() => {
+    if (activeSubTab === 'photo-merger') {
+      setTimeout(drawMergedCanvas, 100);
+    }
+  }, [activeSubTab, photoPreview, sigPreview, canvasWidth, canvasPhotoHeight, canvasSigHeight, gapSize, bgColor]);
+
   // --- Calculate Negative Marks ---
   useEffect(() => {
     const gross = correctCount * marksPerCorrect;
@@ -185,6 +295,12 @@ export default function ExamTools() {
             onClick={() => setActiveSubTab('eligibility')}
           >
             🎓 Eligibility & Age Calculator
+          </button>
+          <button 
+            className={`filter-chip ${activeSubTab === 'photo-merger' ? 'active' : ''}`}
+            onClick={() => setActiveSubTab('photo-merger')}
+          >
+            📷 Photo & Signature Merger
           </button>
         </div>
       </div>
@@ -450,6 +566,143 @@ export default function ExamTools() {
                   <p style={{ margin: 0, fontSize: '0.85rem' }}>Select your birthdate and click "Check Eligibility" above to build your report.</p>
                 </div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* PANEL 4: Photo & Signature Merger */}
+        {activeSubTab === 'photo-merger' && (
+          <div className="tool-card glass-card" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <h3>📷 Photo & Signature Merger</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                Quickly combine your passport photograph and signature into a single image to meet official government application specifications (UPSC/SSC CGL).
+              </p>
+
+              <div className="merger-upload-controls" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {/* Photo Upload */}
+                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                  <label htmlFor="photo-file-input" style={{ display: 'block', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>1. Upload Passport Photograph</label>
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <input 
+                      id="photo-file-input"
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handlePhotoUpload} 
+                      style={{ fontSize: '0.8rem' }}
+                    />
+                    {photoPreview && (
+                      <button className="btn btn-secondary" onClick={handleClearPhoto} style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }}>
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Signature Upload */}
+                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                  <label htmlFor="signature-file-input" style={{ display: 'block', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>2. Upload Signature</label>
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <input 
+                      id="signature-file-input"
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleSigUpload} 
+                      style={{ fontSize: '0.8rem' }}
+                    />
+                    {sigPreview && (
+                      <button className="btn btn-secondary" onClick={handleClearSig} style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }}>
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Advanced Dimensions Settings */}
+                <div style={{ background: 'rgba(255, 255, 255, 0.01)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px dashed rgba(255, 255, 255, 0.06)' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', marginBottom: '0.75rem' }}>Adjust Dimensions (UPSC Standard: 350x450px)</span>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+                    <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                      <label htmlFor="canvas-width-field" style={{ fontSize: '0.7rem' }}>Width (px)</label>
+                      <input 
+                        id="canvas-width-field"
+                        type="number" 
+                        value={canvasWidth} 
+                        onChange={(e) => setCanvasWidth(Math.max(100, parseInt(e.target.value) || 0))} 
+                        style={{ padding: '0.5rem', fontSize: '0.8rem' }}
+                      />
+                    </div>
+                    <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                      <label htmlFor="photo-height-field" style={{ fontSize: '0.7rem' }}>Photo H (px)</label>
+                      <input 
+                        id="photo-height-field"
+                        type="number" 
+                        value={canvasPhotoHeight} 
+                        onChange={(e) => setCanvasPhotoHeight(Math.max(100, parseInt(e.target.value) || 0))} 
+                        style={{ padding: '0.5rem', fontSize: '0.8rem' }}
+                      />
+                    </div>
+                    <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                      <label htmlFor="signature-height-field" style={{ fontSize: '0.7rem' }}>Sig H (px)</label>
+                      <input 
+                        id="signature-height-field"
+                        type="number" 
+                        value={canvasSigHeight} 
+                        onChange={(e) => setCanvasSigHeight(Math.max(30, parseInt(e.target.value) || 0))} 
+                        style={{ padding: '0.5rem', fontSize: '0.8rem' }}
+                      />
+                    </div>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginTop: '0.75rem' }}>
+                    <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                      <label htmlFor="spacing-gap-field" style={{ fontSize: '0.7rem' }}>Spacing Gap (px)</label>
+                      <input 
+                        id="spacing-gap-field"
+                        type="number" 
+                        value={gapSize} 
+                        onChange={(e) => setGapSize(Math.max(0, parseInt(e.target.value) || 0))} 
+                        style={{ padding: '0.5rem', fontSize: '0.8rem' }}
+                      />
+                    </div>
+                    <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                      <label htmlFor="bg-color-field" style={{ fontSize: '0.7rem' }}>Background Color</label>
+                      <input 
+                        id="bg-color-field"
+                        type="color" 
+                        value={bgColor} 
+                        onChange={(e) => setBgColor(e.target.value)} 
+                        style={{ padding: '0.2rem', height: '34px', width: '100%', border: 'none', background: 'transparent', cursor: 'pointer' }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Canvas Output Display */}
+            <div className="results-panel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.02)', padding: '1.5rem', borderRadius: 'var(--radius-lg)', border: '1px dashed rgba(255,255,255,0.08)' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>Live merged Preview</span>
+              
+              <div className="canvas-preview-container" style={{ border: '1px solid rgba(255, 255, 255, 0.1)', padding: '10px', background: 'rgba(0,0,0,0.2)', borderRadius: 'var(--radius-md)', marginBottom: '1.5rem', maxWidth: '100%', overflowX: 'auto' }}>
+                <canvas 
+                  ref={canvasRef} 
+                  style={{ 
+                    display: 'block', 
+                    maxWidth: '100%', 
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                    borderRadius: '4px' 
+                  }} 
+                />
+              </div>
+
+              <button 
+                className="btn btn-primary" 
+                onClick={handleDownloadMerged} 
+                style={{ width: '100%', padding: '0.8rem', fontWeight: 700 }}
+                disabled={!photoPreview}
+              >
+                Download Combined Image (.JPG)
+              </button>
             </div>
           </div>
         )}
