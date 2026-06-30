@@ -32,6 +32,19 @@ export default function ExamTools() {
   const [bgColor, setBgColor] = useState('#FFFFFF');
   const canvasRef = useRef(null);
 
+  // --- Passport Photo Maker State ---
+  const [passportFile, setPassportFile] = useState(null);
+  const [passportPreview, setPassportPreview] = useState(null);
+  const [passportPreset, setPassportPreset] = useState('india-passport');
+  const [passportZoom, setPassportZoom] = useState(1.2);
+  const [passportRotate, setPassportRotate] = useState(0);
+  const [passportX, setPassportX] = useState(0);
+  const [passportY, setPassportY] = useState(0);
+  const [passportBg, setPassportBg] = useState('#F0F8FF'); // Light exam blue default
+  const [brightness, setBrightness] = useState(100);
+  const [contrast, setContrast] = useState(100);
+  const passportCanvasRef = useRef(null);
+
   // --- PDF & JPG Converter State ---
   const [libStatus, setLibStatus] = useState({ jspdf: false, pdfjs: false });
   const [jpgToPdfFiles, setJpgToPdfFiles] = useState([]);
@@ -298,9 +311,98 @@ export default function ExamTools() {
   };
 
   useEffect(() => {
-    // Redraw photo merger when states change
     setTimeout(drawMergedCanvas, 100);
   }, [photoPreview, sigPreview, canvasWidth, canvasPhotoHeight, canvasSigHeight, gapSize, bgColor]);
+
+  // --- Passport Photo Maker Logic ---
+  const handlePassportUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setPassportFile(file);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setPassportPreview(event.target.result);
+      setPassportZoom(1.2);
+      setPassportRotate(0);
+      setPassportX(0);
+      setPassportY(0);
+      setBrightness(100);
+      setContrast(100);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleClearPassport = () => {
+    setPassportFile(null);
+    setPassportPreview(null);
+  };
+
+  const handleDownloadPassport = () => {
+    const canvas = passportCanvasRef.current;
+    if (!canvas || !passportPreview) {
+      alert("Please upload your photo first.");
+      return;
+    }
+    const link = document.createElement('a');
+    link.download = `passport_photo_${passportPreset}.jpg`;
+    link.href = canvas.toDataURL('image/jpeg', 0.95);
+    link.click();
+  };
+
+  const drawPassportPhoto = () => {
+    const canvas = passportCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let w = 350;
+    let h = 450;
+    if (passportPreset === 'us-passport') {
+      w = 600;
+      h = 600;
+    } else if (passportPreset === 'ibps-size') {
+      w = 450;
+      h = 350;
+    }
+    
+    canvas.width = w;
+    canvas.height = h;
+
+    ctx.fillStyle = passportBg;
+    ctx.fillRect(0, 0, w, h);
+
+    if (passportPreview) {
+      const img = new Image();
+      img.onload = () => {
+        ctx.save();
+        ctx.translate(w / 2 + passportX, h / 2 + passportY);
+        ctx.rotate((passportRotate * Math.PI) / 180);
+        ctx.scale(passportZoom, passportZoom);
+        ctx.filter = `brightness(${brightness}%) contrast(${contrast}%)`;
+
+        const imgRatio = img.width / img.height;
+        let drawW = w;
+        let drawH = w / imgRatio;
+
+        ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
+        ctx.restore();
+      };
+      img.src = passportPreview;
+    } else {
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.15)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(5, 5, w - 10, h - 10);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText("Upload Portrait Photo", w / 2, h / 2);
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(drawPassportPhoto, 100);
+  }, [passportPreview, passportPreset, passportZoom, passportRotate, passportX, passportY, passportBg, brightness, contrast]);
 
   // --- PDF & JPG Converter Logic ---
   const handleJpgToPdfUpload = (e) => {
@@ -495,7 +597,6 @@ export default function ExamTools() {
         </div>
       </div>
 
-      {/* Grid Dashboard Frame containing every tool in its own colored square block */}
       <div className="tools-grid-container">
 
         {/* 1. NEGATIVE CALCULATOR - Indigo Block */}
@@ -775,7 +876,106 @@ export default function ExamTools() {
           </div>
         </div>
 
-        {/* 5. PDF ⇄ JPG CONVERTER - Emerald Block (Full Width on Desktop) */}
+        {/* 5. PASSPORT PHOTO MAKER - Cyan Block */}
+        <div className="tool-block-card tool-block-cyan">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <span style={{ fontSize: '1.25rem' }}>📷 Passport Photo Maker</span>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', margin: 0 }}>
+              Adjust, rotate, zoom, and color-background standard passport size crops.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div style={{ background: 'rgba(255, 255, 255, 0.01)', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.04)' }}>
+                <label htmlFor="passport-file-input" style={{ display: 'block', fontWeight: 600, fontSize: '0.75rem', marginBottom: '0.35rem' }}>Upload Portrait Image</label>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                  <input id="passport-file-input" type="file" accept="image/*" onChange={handlePassportUpload} style={{ fontSize: '0.75rem', width: '100%' }} />
+                  {passportPreview && <button className="btn btn-secondary" onClick={handleClearPassport} style={{ padding: '0.2rem 0.5rem', fontSize: '0.7rem' }}>Clear</button>}
+                </div>
+              </div>
+
+              {passportPreview && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', background: 'rgba(0,0,0,0.1)', padding: '0.75rem', borderRadius: 'var(--radius-md)' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                    <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                      <label htmlFor="passport-preset-select" style={{ fontSize: '0.65rem' }}>Dimensions Size</label>
+                      <select 
+                        id="passport-preset-select"
+                        value={passportPreset} 
+                        onChange={(e) => setPassportPreset(e.target.value)}
+                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--radius-sm)', padding: '0.25rem', color: 'var(--text-main)', fontSize: '0.75rem', outline: 'none' }}
+                      >
+                        <option value="india-passport">India Passport (3.5x4.5cm)</option>
+                        <option value="ssc-size">SSC Register (3.5x4.5cm)</option>
+                        <option value="us-passport">US Passport (2" x 2")</option>
+                        <option value="ibps-size">IBPS Officer (4.5x3.5cm)</option>
+                      </select>
+                    </div>
+                    <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                      <label htmlFor="passport-bg-select" style={{ fontSize: '0.65rem' }}>Bg Canvas Color</label>
+                      <select 
+                        id="passport-bg-select"
+                        value={passportBg} 
+                        onChange={(e) => setPassportBg(e.target.value)}
+                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--radius-sm)', padding: '0.25rem', color: 'var(--text-main)', fontSize: '0.75rem', outline: 'none' }}
+                      >
+                        <option value="#F0F8FF">Light Exam Blue</option>
+                        <option value="#FFFFFF">Solid White</option>
+                        <option value="#EAEAEA">Light Grey</option>
+                        <option value="#3b82f6">Solid Blue</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', marginTop: '0.25rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Zoom: {passportZoom.toFixed(1)}x</span>
+                      <input type="range" min="0.5" max="3" step="0.1" value={passportZoom} onChange={(e) => setPassportZoom(parseFloat(e.target.value))} style={{ width: '110px', height: '3px' }} />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Rotate: {passportRotate}°</span>
+                      <input type="range" min="-180" max="180" step="1" value={passportRotate} onChange={(e) => setPassportRotate(parseInt(e.target.value))} style={{ width: '110px', height: '3px' }} />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Shift X: {passportX}px</span>
+                      <input type="range" min="-150" max="150" step="1" value={passportX} onChange={(e) => setPassportX(parseInt(e.target.value))} style={{ width: '110px', height: '3px' }} />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Shift Y: {passportY}px</span>
+                      <input type="range" min="-150" max="150" step="1" value={passportY} onChange={(e) => setPassportY(parseInt(e.target.value))} style={{ width: '110px', height: '3px' }} />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.2rem', marginTop: '0.2rem' }}>
+                      <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Brightness: {brightness}%</span>
+                      <input type="range" min="50" max="150" step="1" value={brightness} onChange={(e) => setBrightness(parseInt(e.target.value))} style={{ width: '110px', height: '3px' }} />
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Contrast: {contrast}%</span>
+                      <input type="range" min="50" max="150" step="1" value={contrast} onChange={(e) => setContrast(parseInt(e.target.value))} style={{ width: '110px', height: '3px' }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div style={{ background: 'rgba(0,0,0,0.15)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px dashed rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Passport Photo Preview</span>
+              <div style={{ width: '100%', maxHeight: '180px', overflowY: 'auto', background: 'rgba(0,0,0,0.15)', display: 'flex', justifyContent: 'center', padding: '0.5rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)', marginBottom: '0.75rem' }}>
+                <canvas ref={passportCanvasRef} style={{ display: 'block', maxWidth: '100%', height: 'auto', borderRadius: '2px', border: '1px solid rgba(255,255,255,0.1)' }} />
+              </div>
+              <button 
+                className="btn btn-primary" 
+                onClick={handleDownloadPassport} 
+                style={{ width: '100%', padding: '0.6rem', fontSize: '0.85rem', fontWeight: 700 }}
+                disabled={!passportPreview}
+              >
+                Download Passport Photo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* 6. PDF ⇄ JPG CONVERTER - Emerald Block (Full Width on Desktop) */}
         <div className="tool-block-card tool-block-emerald tool-block-full-width">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <span style={{ fontSize: '1.25rem' }}>📄 Document PDF ⇄ JPG Converters</span>
@@ -862,7 +1062,7 @@ export default function ExamTools() {
                       </div>
                       <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column', width: '80px' }}>
                         <label htmlFor="quality-field" style={{ fontSize: '0.6rem' }}>Quality</label>
-                        <select id="quality-field" value={renderScale} onChange={(e) => setRenderScale(parseFloat(e.target.value))} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--radius-sm)', padding: '0.2rem', color: 'var(--text-main)', fontSize: '0.75rem', outline: 'none' }}>
+                        <select id="quality-field" value={renderScale} onChange={(e) => setRenderScale(parseFloat(e.target.value))} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--radius-sm)', padding: '0.25rem', color: 'var(--text-main)', fontSize: '0.75rem', outline: 'none' }}>
                           <option value={1.0}>1x</option>
                           <option value={1.5}>1.5x</option>
                           <option value={2.0}>2x</option>
