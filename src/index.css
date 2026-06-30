@@ -5973,3 +5973,48 @@ body.light-theme .robot-mouth {
 .timer-active .timer-svg-container {
   animation: timer-pulse 3s infinite ease-in-out;
 }
+
+/* Telegram Top Sticky Banner */
+.telegram-top-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-main);
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.04);
+  text-align: center;
+}
+
+.telegram-banner-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.telegram-banner-link {
+  color: #38bdf8;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px dashed #38bdf8;
+  transition: opacity 0.2s ease;
+  padding: 0 0.25rem;
+  white-space: nowrap;
+}
+
+.telegram-banner-link:hover {
+  opacity: 0.8;
+}
+
+body.light-theme .telegram-top-banner {
+  background: rgba(99, 102, 241, 0.05);
+  border-color: rgba(99, 102, 241, 0.12);
+  color: #1e293b;
+}

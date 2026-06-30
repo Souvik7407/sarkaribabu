@@ -561,6 +561,12 @@ export default function App() {
 
       {/* Main Content Pane */}
       <main className="main-content">
+        <div className="telegram-top-banner">
+          <span className="telegram-banner-text">📢 Join our Telegram Channel for daily current affairs PDFs and exam updates!</span>
+          <a href="https://t.me/sarkaribabuprep" target="_blank" rel="noopener noreferrer" className="telegram-banner-link">
+            Join Channel
+          </a>
+        </div>
         {renderTabContent()}
         <footer className="app-footer">
           <div className="footer-content">
