@@ -623,7 +623,6 @@ export default function App() {
                 <h4>Development</h4>
                 <ul>
                   <li><span className="footer-meta-item">Developer: <strong>Souvik Deb</strong></span></li>
-                  <li><span className="footer-meta-item">Status: <strong>Production Ready</strong></span></li>
                   <li><span className="footer-meta-item">Build Version: <strong>v1.2.4-stable</strong></span></li>
                 </ul>
               </div>
