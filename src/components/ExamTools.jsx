@@ -45,6 +45,17 @@ export default function ExamTools() {
   const [contrast, setContrast] = useState(100);
   const passportCanvasRef = useRef(null);
 
+  // --- JPG Size Reducer State ---
+  const [reducerFile, setReducerFile] = useState(null);
+  const [reducerPreview, setReducerPreview] = useState(null);
+  const [originalSizeKB, setOriginalSizeKB] = useState(0);
+  const [targetSizeKB, setTargetSizeKB] = useState(50); // Default target 50 KB
+  const [reducedSizeKB, setReducedSizeKB] = useState(0);
+  const [reducedPreview, setReducedPreview] = useState(null);
+  const [isCompressing, setIsCompressing] = useState(false);
+  const [reducedWidth, setReducedWidth] = useState(0);
+  const [reducedHeight, setReducedHeight] = useState(0);
+
   // --- PDF & JPG Converter State ---
   const [libStatus, setLibStatus] = useState({ jspdf: false, pdfjs: false });
   const [jpgToPdfFiles, setJpgToPdfFiles] = useState([]);
@@ -404,6 +415,109 @@ export default function ExamTools() {
     setTimeout(drawPassportPhoto, 100);
   }, [passportPreview, passportPreset, passportZoom, passportRotate, passportX, passportY, passportBg, brightness, contrast]);
 
+  // --- JPG Size Reducer Logic ---
+  const compressImageToTarget = (imgSrc) => {
+    if (!imgSrc) return;
+    setIsCompressing(true);
+
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      let w = img.width;
+      let h = img.height;
+
+      // Auto-resize giant dimensions to speed up compression and guarantee KB targets
+      const maxDim = 1200;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) {
+          h = Math.round((h * maxDim) / w);
+          w = maxDim;
+        } else {
+          w = Math.round((w * maxDim) / h);
+          h = maxDim;
+        }
+      }
+
+      canvas.width = w;
+      canvas.height = h;
+      ctx.drawImage(img, 0, 0, w, h);
+
+      let low = 0.01;
+      let high = 0.98;
+      let bestQuality = 0.8;
+      let finalDataUrl = '';
+      let finalSize = 0;
+
+      // Binary search for target quality mapping
+      for (let i = 0; i < 10; i++) {
+        const mid = (low + high) / 2;
+        const dataUrl = canvas.toDataURL('image/jpeg', mid);
+        
+        // Base64 to KB conversion (approx 3 bytes per 4 characters)
+        const base64Length = dataUrl.length - dataUrl.indexOf(',') - 1;
+        const sizeInKB = (base64Length * 0.75) / 1024;
+
+        if (sizeInKB <= targetSizeKB) {
+          bestQuality = mid;
+          finalDataUrl = dataUrl;
+          finalSize = sizeInKB;
+          low = mid + 0.01; // Try to maximize quality
+        } else {
+          high = mid - 0.01; // Quality too high, shrink further
+          if (finalDataUrl === '') {
+            finalDataUrl = dataUrl;
+            finalSize = sizeInKB;
+          }
+        }
+      }
+
+      setReducedPreview(finalDataUrl);
+      setReducedSizeKB(finalSize);
+      setReducedWidth(w);
+      setReducedHeight(h);
+      setIsCompressing(false);
+    };
+    img.src = imgSrc;
+  };
+
+  const handleReducerUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setReducerFile(file);
+    setOriginalSizeKB(parseFloat((file.size / 1024).toFixed(1)));
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setReducerPreview(event.target.result);
+      // Trigger initial compression
+      compressImageToTarget(event.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleClearReducer = () => {
+    setReducerFile(null);
+    setReducerPreview(null);
+    setReducedPreview(null);
+    setReducedSizeKB(0);
+  };
+
+  const handleDownloadReduced = () => {
+    if (!reducedPreview) return;
+    const link = document.createElement('a');
+    link.download = `sarkaribabu_compressed_${targetSizeKB}kb.jpg`;
+    link.href = reducedPreview;
+    link.click();
+  };
+
+  useEffect(() => {
+    if (reducerPreview) {
+      compressImageToTarget(reducerPreview);
+    }
+  }, [targetSizeKB, reducerPreview]);
+
   // --- PDF & JPG Converter Logic ---
   const handleJpgToPdfUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -699,8 +813,8 @@ export default function ExamTools() {
             </p>
           </div>
 
-          <div className="timer-svg-container" style={{ margin: '1rem 0' }}>
-            <svg width="180" height="180" viewBox="0 0 200 200" style={{ transform: 'rotate(-90deg)', display: 'block', margin: '0 auto' }}>
+          <div className="timer-svg-container" style={{ margin: '0.5rem 0' }}>
+            <svg width="150" height="150" viewBox="0 0 200 200" style={{ transform: 'rotate(-90deg)', display: 'block', margin: '0 auto' }}>
               <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="6" />
               <circle 
                 cx="100" 
@@ -716,8 +830,8 @@ export default function ExamTools() {
               />
             </svg>
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--text-main)' }}>{formatTime(secondsLeft)}</span>
-              <span style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: timerMode === 'work' ? 'var(--primary)' : '#22c55e', marginTop: '0.1rem' }}>
+              <span style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-main)' }}>{formatTime(secondsLeft)}</span>
+              <span style={{ fontSize: '0.6rem', fontWeight: 700, textTransform: 'uppercase', color: timerMode === 'work' ? 'var(--primary)' : '#22c55e', marginTop: '0.1rem' }}>
                 {timerMode === 'work' ? 'Focusing' : 'Break'}
               </span>
             </div>
@@ -975,7 +1089,90 @@ export default function ExamTools() {
           </div>
         </div>
 
-        {/* 6. PDF ⇄ JPG CONVERTER - Emerald Block (Full Width on Desktop) */}
+        {/* 6. JPG SIZE REDUCER - Amber Block */}
+        <div className="tool-block-card tool-block-amber">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <span style={{ fontSize: '1.25rem' }}>📉 JPG Size Reducer</span>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', margin: 0 }}>
+              Compress images to a specific KB limit (e.g. 20KB or 50KB) to meet portal requirements.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div style={{ background: 'rgba(255, 255, 255, 0.01)', padding: '0.75rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.04)' }}>
+                <label htmlFor="reducer-file-input" style={{ display: 'block', fontWeight: 600, fontSize: '0.75rem', marginBottom: '0.35rem' }}>Upload JPG / PNG Image</label>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                  <input id="reducer-file-input" type="file" accept="image/*" onChange={handleReducerUpload} style={{ fontSize: '0.75rem', width: '100%' }} />
+                  {reducerPreview && <button className="btn btn-secondary" onClick={handleClearReducer} style={{ padding: '0.2rem 0.5rem', fontSize: '0.7rem' }}>Clear</button>}
+                </div>
+              </div>
+
+              {reducerPreview && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', background: 'rgba(0,0,0,0.1)', padding: '0.75rem', borderRadius: 'var(--radius-md)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Original File Size:</span>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#f43f5e' }}>{originalSizeKB} KB</span>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', marginTop: '0.25rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <label htmlFor="target-kb-slider" style={{ fontSize: '0.75rem', fontWeight: 600 }}>Target Size: {targetSizeKB} KB</label>
+                      <input 
+                        id="target-kb-slider"
+                        type="range" 
+                        min="10" 
+                        max="300" 
+                        step="5" 
+                        value={targetSizeKB} 
+                        onChange={(e) => setTargetSizeKB(parseInt(e.target.value))} 
+                        style={{ width: '120px', height: '3px' }} 
+                      />
+                    </div>
+                    <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', margin: 0 }}>
+                      Adjust the slider to your desired KB threshold. The algorithm will optimize compression quality automatically.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div style={{ background: 'rgba(0,0,0,0.15)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px dashed rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Reduction Results</span>
+              {reducedPreview ? (
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                  <div style={{ width: '100%', height: '110px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.15)', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden' }}>
+                    <img src={reducedPreview} alt="Reduced Preview" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', width: '100%', textAlign: 'center', background: 'rgba(255,255,255,0.02)', padding: '0.4rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.02)' }}>
+                    <div>
+                      <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', display: 'block' }}>Output KB</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#22c55e' }}>{reducedSizeKB.toFixed(1)} KB</span>
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', display: 'block' }}>Resolution</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700 }}>{reducedWidth}x{reducedHeight}</span>
+                    </div>
+                  </div>
+                  <button 
+                    className="btn btn-primary" 
+                    onClick={handleDownloadReduced} 
+                    style={{ width: '100%', padding: '0.6rem', fontSize: '0.85rem', fontWeight: 700, marginTop: '0.25rem' }}
+                    disabled={isCompressing}
+                  >
+                    {isCompressing ? 'Compressing...' : 'Download Reduced Image'}
+                  </button>
+                </div>
+              ) : (
+                <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.75rem', padding: '1.5rem 0' }}>
+                  {reducerFile ? 'Compressing image...' : 'Upload an image file to compress.'}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* 7. PDF ⇄ JPG CONVERTER - Emerald Block (Full Width on Desktop) */}
         <div className="tool-block-card tool-block-emerald tool-block-full-width">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <span style={{ fontSize: '1.25rem' }}>📄 Document PDF ⇄ JPG Converters</span>
