@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 
 // Developer Configuration
 // Set this to true and enter your publisher ID below to activate real Google Adsense ads!
-const IS_LIVE_ADSENSE_ACTIVE = false; 
-const ADSENSE_PUBLISHER_ID = "ca-pub-XXXXXXXXXXXXXXXX"; // e.g., ca-pub-1234567890123456
+const IS_LIVE_ADSENSE_ACTIVE = true; 
+const ADSENSE_PUBLISHER_ID = "ca-pub-3470517463098230"; // e.g., ca-pub-1234567890123456
 
 export default function AdSenseBlock({ slotId, format = "auto", responsive = "true", adStyle = {} }) {
   
