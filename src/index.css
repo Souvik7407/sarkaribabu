@@ -2917,6 +2917,7 @@ body.light-theme .digest-expand-btn {
   text-decoration: none;
   transition: all var(--transition-normal);
   box-shadow: 0 4px 12px rgba(0, 136, 204, 0.05);
+  white-space: nowrap;
 }
 
 .footer-telegram-btn:hover {
