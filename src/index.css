@@ -5843,7 +5843,7 @@ body.light-theme .robot-mouth {
    ASPIRANT TOOLKIT / EXAM TOOLS
    ========================================== */
 .exam-tools-container {
-  padding: 1.5rem 1rem;
+  padding: 1rem 0.5rem;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -5851,8 +5851,8 @@ body.light-theme .robot-mouth {
 .tools-grid-container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  padding: 1rem 0;
+  gap: 1.25rem;
+  padding: 0.75rem 0;
 }
 
 @media (min-width: 1024px) {
@@ -5862,12 +5862,12 @@ body.light-theme .robot-mouth {
 }
 
 .tool-block-card {
-  border-radius: var(--radius-lg);
-  padding: 1.75rem;
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
   background: rgba(255, 255, 255, 0.02);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.85rem;
   border-width: 2px;
   border-style: solid;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
