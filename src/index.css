@@ -6019,3 +6019,28 @@ body.light-theme .telegram-top-banner {
   border-color: rgba(99, 102, 241, 0.12);
   color: #1e293b;
 }
+
+/* Google AdSense Dynamic Collapse Guard */
+.adsense-outer-container {
+  display: none;
+  width: 100%;
+  margin: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Make container visible only when AdSense successfully returns and fills an ad slot */
+.adsense-outer-container:has(ins[data-ad-status="filled"]) {
+  display: block;
+  margin: 1.5rem 0;
+  min-height: 90px;
+}
+
+/* Completely hide unfilled and default state AdSense containers */
+ins.adsbygoogle[data-ad-status="unfilled"],
+ins.adsbygoogle[data-ad-status="unfilled"] iframe {
+  display: none !important;
+  height: 0px !important;
+  min-height: 0px !important;
+}

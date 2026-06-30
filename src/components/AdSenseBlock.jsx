@@ -19,7 +19,7 @@ export default function AdSenseBlock({ slotId, format = "auto", responsive = "tr
 
   if (IS_LIVE_ADSENSE_ACTIVE) {
     return (
-      <div className="adsense-outer-container" style={{ margin: '1.5rem 0', minHeight: '90px', background: 'transparent' }}>
+      <div className="adsense-outer-container">
         <ins className="adsbygoogle"
              style={{ display: 'block', ...adStyle }}
              data-ad-client={ADSENSE_PUBLISHER_ID}
