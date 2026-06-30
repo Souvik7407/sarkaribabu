@@ -1,0 +1,7 @@
+# SARKARI BABU - Robots.txt File
+# Allow all search engine crawlers to index the website
+
+User-agent: *
+Allow: /
+
+Sitemap: https://sarkaribabu.in/sitemap.xml
