@@ -3862,6 +3862,7 @@ body.light-theme .syllabus-focus-tag {
   box-shadow: 0 0 0 2px rgba(203, 240, 120, 0.2);
 }
 
+select option,
 .sub-exam-select-dropdown option {
   background: #1e293b;
   color: #f8fafc;
@@ -3896,6 +3897,7 @@ body.light-theme .sub-exam-select-dropdown:hover {
   background: rgba(0, 0, 0, 0.04);
 }
 
+body.light-theme select option,
 body.light-theme .sub-exam-select-dropdown option {
   background: #ffffff;
   color: #1e293b;
