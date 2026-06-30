@@ -6,7 +6,6 @@ export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, 
     {
       id: 'dashboard',
       label: 'Dashboard',
-      section: 'STUDY PORTAL',
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="7" height="9" rx="1" />
@@ -46,22 +45,21 @@ export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, 
       )
     },
     {
+      id: 'exam-tools',
+      label: 'Aspirant Tools',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+        </svg>
+      )
+    },
+    {
       id: 'quiz-zone',
       label: 'Quiz Zone',
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" />
           <path d="m9 12 2 2 4-4" />
-        </svg>
-      )
-    },
-    {
-      id: 'ai-tutor',
-      label: 'AI Doubt Solver',
-      section: 'TOOL',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
       )
     },
@@ -81,6 +79,15 @@ export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, 
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
           <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+        </svg>
+      )
+    },
+    {
+      id: 'ai-tutor',
+      label: 'AI Doubt Solver',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
       )
     },
@@ -123,26 +130,22 @@ export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, 
 
         <nav className="sidebar-nav">
           {menuItems.map((item) => (
-            <React.Fragment key={item.id}>
-              {item.section && (
-                <span className="sidebar-section-title">{item.section}</span>
-              )}
-              <button
-                className={`sidebar-link sidebar-${item.id} ${activeTab === item.id ? 'active' : ''}`}
-                onClick={() => { setActiveTab(item.id); onClose(); }}
-              >
-                <span className="sidebar-link-icon">{item.icon}</span>
-                <div className="sidebar-link-text-group">
-                  <span className="sidebar-link-text">{item.label}</span>
-                  {item.id === 'quiz-zone' && (
-                    <span className="sidebar-coming-soon-text">Coming Soon</span>
-                  )}
-                </div>
-                {item.id === 'ai-tutor' && (
-                  <span className="ai-badge-live">LIVE</span>
+            <button
+              key={item.id}
+              className={`sidebar-link sidebar-${item.id} ${activeTab === item.id ? 'active' : ''}`}
+              onClick={() => { setActiveTab(item.id); onClose(); }}
+            >
+              <span className="sidebar-link-icon">{item.icon}</span>
+              <div className="sidebar-link-text-group">
+                <span className="sidebar-link-text">{item.label}</span>
+                {item.id === 'quiz-zone' && (
+                  <span className="sidebar-coming-soon-text">Coming Soon</span>
                 )}
-              </button>
-            </React.Fragment>
+              </div>
+              {item.id === 'ai-tutor' && (
+                <span className="ai-badge-live">LIVE</span>
+              )}
+            </button>
           ))}
         </nav>
 

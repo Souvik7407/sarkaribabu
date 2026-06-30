@@ -11,6 +11,7 @@ import AudioPlayer from './components/AudioPlayer';
 import AITutor from './components/AITutor';
 import BuyMaterial from './components/BuyMaterial';
 import InfoModal from './components/InfoModal';
+import ExamTools from './components/ExamTools';
 
 // Import curated database
 import { initialCurrentAffairs, staticGKData, initialQuizzes, generateDailyNewsForDate, examCriteriaData } from './data/db';
@@ -506,6 +507,10 @@ export default function App() {
         return (
           <BuyMaterial />
         );
+      case 'exam-tools':
+        return (
+          <ExamTools />
+        );
       default:
         return <div>Tab not found</div>;
     }
@@ -595,6 +600,7 @@ export default function App() {
                   <li><a href="#quiz-zone" onClick={(e) => { e.preventDefault(); setActiveTab('quiz-zone'); }}>Quiz Zone</a></li>
                   <li><a href="#bookmarks" onClick={(e) => { e.preventDefault(); setActiveTab('bookmarks'); }}>Bookmarks & Saved</a></li>
                   <li><a href="#streak" onClick={(e) => { e.preventDefault(); setActiveTab('dashboard'); }}>Streak Calendar</a></li>
+                  <li><a href="#exam-tools" onClick={(e) => { e.preventDefault(); setActiveTab('exam-tools'); }}>Aspirant Tools</a></li>
                 </ul>
               </div>
 
