@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sarkaribabu.in/sitemap.xml
+Sitemap: https://sarkaribabu.online/sitemap.xml
