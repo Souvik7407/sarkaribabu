@@ -17,6 +17,7 @@ export default function ExamTools() {
   const timerRef = useRef(null);
 
   // --- Eligibility Calculator State ---
+  // --- Eligibility Calculator State ---
   const [dob, setDob] = useState('2000-01-01');
   const [category, setCategory] = useState('General');
   const [examType, setExamType] = useState('UPSC'); // 'UPSC', 'SSC-CGL', 'IBPS-PO'
@@ -33,6 +34,17 @@ export default function ExamTools() {
   const [gapSize, setGapSize] = useState(10);
   const [bgColor, setBgColor] = useState('#FFFFFF');
   const canvasRef = useRef(null);
+
+  // --- PDF & JPG Converter State ---
+  const [libStatus, setLibStatus] = useState({ jspdf: false, pdfjs: false });
+  const [jpgToPdfFiles, setJpgToPdfFiles] = useState([]);
+  const [pdfOrientation, setPdfOrientation] = useState('portrait');
+  const [pdfMargin, setPdfMargin] = useState('none');
+  const [pdfToJpgFile, setPdfToJpgFile] = useState(null);
+  const [pdfToJpgPages, setPdfToJpgPages] = useState([]);
+  const [pdfPageCount, setPdfPageCount] = useState(0);
+  const [isPdfProcessing, setIsPdfProcessing] = useState(false);
+  const [renderScale, setRenderScale] = useState(1.5);
 
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
@@ -131,6 +143,218 @@ export default function ExamTools() {
       setTimeout(drawMergedCanvas, 100);
     }
   }, [activeSubTab, photoPreview, sigPreview, canvasWidth, canvasPhotoHeight, canvasSigHeight, gapSize, bgColor]);
+
+  useEffect(() => {
+    if (activeSubTab === 'pdf-tools') {
+      // Inject jsPDF if needed
+      if (!window.jspdf) {
+        const scriptJsPdf = document.createElement('script');
+        scriptJsPdf.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+        scriptJsPdf.async = true;
+        scriptJsPdf.onload = () => setLibStatus(prev => ({ ...prev, jspdf: true }));
+        document.head.appendChild(scriptJsPdf);
+      } else {
+        setLibStatus(prev => ({ ...prev, jspdf: true }));
+      }
+
+      // Inject PDF.js if needed
+      if (!window.pdfjsLib) {
+        const scriptPdfJs = document.createElement('script');
+        scriptPdfJs.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js';
+        scriptPdfJs.async = true;
+        scriptPdfJs.onload = () => {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+          setLibStatus(prev => ({ ...prev, pdfjs: true }));
+        };
+        document.head.appendChild(scriptPdfJs);
+      } else {
+        setLibStatus(prev => ({ ...prev, pdfjs: true }));
+      }
+    }
+  }, [activeSubTab]);
+
+  const handleJpgToPdfUpload = (e) => {
+    const files = Array.from(e.target.files);
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setJpgToPdfFiles((prev) => [
+          ...prev,
+          {
+            id: Math.random().toString(36).substring(2, 9),
+            name: file.name,
+            preview: event.target.result
+          }
+        ]);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleRemoveJpgFile = (id) => {
+    setJpgToPdfFiles(prev => prev.filter(f => f.id !== id));
+  };
+
+  const handleMoveJpgFile = (id, direction) => {
+    setJpgToPdfFiles((prev) => {
+      const index = prev.findIndex(f => f.id === id);
+      if (index === -1) return prev;
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= prev.length) return prev;
+
+      const newFiles = [...prev];
+      const temp = newFiles[index];
+      newFiles[index] = newFiles[targetIndex];
+      newFiles[targetIndex] = temp;
+      return newFiles;
+    });
+  };
+
+  const handleConvertJpgToPdf = () => {
+    if (!libStatus.jspdf || !window.jspdf) {
+      alert("jsPDF library is still loading. Please wait a moment.");
+      return;
+    }
+    if (jpgToPdfFiles.length === 0) {
+      alert("Please upload at least one image file first.");
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+      orientation: pdfOrientation,
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    
+    let marginSize = 0;
+    if (pdfMargin === 'small') marginSize = 5;
+    else if (pdfMargin === 'normal') marginSize = 10;
+
+    const useWidth = pageW - (marginSize * 2);
+    const useHeight = pageH - (marginSize * 2);
+
+    const addImagePage = (file, fileIndex) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          if (fileIndex > 0) {
+            doc.addPage();
+          }
+
+          const imgW = img.width;
+          const imgH = img.height;
+          const ratio = Math.min(useWidth / imgW, useHeight / imgH);
+
+          const drawW = imgW * ratio;
+          const drawH = imgH * ratio;
+
+          const x = marginSize + (useWidth - drawW) / 2;
+          const y = marginSize + (useHeight - drawH) / 2;
+
+          doc.addImage(file.preview, 'JPEG', x, y, drawW, drawH);
+          resolve();
+        };
+        img.src = file.preview;
+      });
+    };
+
+    jpgToPdfFiles.reduce((promise, file, index) => {
+      return promise.then(() => addImagePage(file, index));
+    }, Promise.resolve()).then(() => {
+      doc.save('sarkaribabu_converted.pdf');
+    });
+  };
+
+  const handlePdfToJpgUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setPdfToJpgFile(file);
+    setPdfToJpgPages([]);
+    setPdfPageCount(0);
+  };
+
+  const handleConvertPdfToJpg = () => {
+    if (!libStatus.pdfjs || !window.pdfjsLib) {
+      alert("PDF.js library is still loading. Please wait a moment.");
+      return;
+    }
+    if (!pdfToJpgFile) {
+      alert("Please select a PDF file first.");
+      return;
+    }
+
+    setIsPdfProcessing(true);
+    const reader = new FileReader();
+
+    reader.onload = function() {
+      const typedArray = new Uint8Array(this.result);
+
+      window.pdfjsLib.getDocument({ data: typedArray }).promise.then((pdf) => {
+        setPdfPageCount(pdf.numPages);
+        const pagesPromise = [];
+
+        const renderPage = (pageNum) => {
+          return pdf.getPage(pageNum).then((page) => {
+            const viewport = page.getViewport({ scale: renderScale });
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+
+            return page.render(renderContext).promise.then(() => {
+              return {
+                pageNum,
+                dataUrl: canvas.toDataURL('image/jpeg', 0.95)
+              };
+            });
+          });
+        };
+
+        let sequencePromise = Promise.resolve();
+        const results = [];
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          sequencePromise = sequencePromise.then(() => {
+            return renderPage(i).then((pageData) => {
+              results.push(pageData);
+              setPdfToJpgPages([...results]);
+            });
+          });
+        }
+
+        sequencePromise.then(() => {
+          setIsPdfProcessing(false);
+        }).catch((err) => {
+          console.error(err);
+          alert("Error processing PDF pages.");
+          setIsPdfProcessing(false);
+        });
+
+      }).catch((err) => {
+        console.error(err);
+        alert("Failed to load PDF file. Please ensure it is a valid PDF.");
+        setIsPdfProcessing(false);
+      });
+    };
+
+    reader.readAsArrayBuffer(pdfToJpgFile);
+  };
+
+  const handleDownloadSingleJpg = (page) => {
+    const link = document.createElement('a');
+    link.download = `pdf_page_${page.pageNum}.jpg`;
+    link.href = page.dataUrl;
+    link.click();
+  };
 
   // --- Calculate Negative Marks ---
   useEffect(() => {
@@ -301,6 +525,12 @@ export default function ExamTools() {
             onClick={() => setActiveSubTab('photo-merger')}
           >
             📷 Photo & Signature Merger
+          </button>
+          <button 
+            className={`filter-chip ${activeSubTab === 'pdf-tools' ? 'active' : ''}`}
+            onClick={() => setActiveSubTab('pdf-tools')}
+          >
+            📄 JPG ⇄ PDF Converters
           </button>
         </div>
       </div>
@@ -704,6 +934,200 @@ export default function ExamTools() {
                 Download Combined Image (.JPG)
               </button>
             </div>
+          </div>
+        )}
+
+        {/* PANEL 5: JPG to PDF and PDF to JPG Converter */}
+        {activeSubTab === 'pdf-tools' && (
+          <div className="tool-card glass-card" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2.5rem' }}>
+            
+            {/* JPG TO PDF COLUMN */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '2.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ fontSize: '1.5rem' }}>🖼️</span>
+                <h3 style={{ margin: 0 }}>JPG to PDF Converter</h3>
+              </div>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                Upload multiple images (JPG, PNG) and combine them into a single, print-ready PDF document. Re-order files as needed.
+              </p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.25rem' }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                  <label htmlFor="pdf-images-input" style={{ display: 'block', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>Select Images</label>
+                  <input 
+                    id="pdf-images-input"
+                    type="file" 
+                    accept="image/*" 
+                    multiple 
+                    onChange={handleJpgToPdfUpload} 
+                    style={{ fontSize: '0.8rem', width: '100%' }}
+                  />
+                </div>
+
+                {jpgToPdfFiles.length > 0 && (
+                  <div style={{ background: 'rgba(0,0,0,0.15)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', marginBottom: '1rem' }}>Uploaded Images List ({jpgToPdfFiles.length})</span>
+                    
+                    <div className="pdf-files-sortable-list" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '200px', overflowY: 'auto', paddingRight: '0.25rem' }}>
+                      {jpgToPdfFiles.map((file, idx) => (
+                        <div key={file.id} style={{ display: 'flex', alignItems: 'center', justifyItems: 'space-between', background: 'rgba(255,255,255,0.03)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(255,255,255,0.03)', gap: '0.5rem' }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', minWidth: '20px' }}>#{idx+1}</span>
+                          <span style={{ fontSize: '0.8rem', color: 'var(--text-main)', flex: 1, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{file.name}</span>
+                          
+                          <div style={{ display: 'flex', gap: '0.25rem' }}>
+                            <button 
+                              className="btn btn-secondary" 
+                              onClick={() => handleMoveJpgFile(file.id, -1)} 
+                              disabled={idx === 0} 
+                              style={{ padding: '0.25rem 0.5rem', fontSize: '0.7rem' }}
+                              aria-label="Move Up"
+                            >
+                              ▲
+                            </button>
+                            <button 
+                              className="btn btn-secondary" 
+                              onClick={() => handleMoveJpgFile(file.id, 1)} 
+                              disabled={idx === jpgToPdfFiles.length - 1} 
+                              style={{ padding: '0.25rem 0.5rem', fontSize: '0.7rem' }}
+                              aria-label="Move Down"
+                            >
+                              ▼
+                            </button>
+                            <button 
+                              className="btn btn-secondary" 
+                              onClick={() => handleRemoveJpgFile(file.id)} 
+                              style={{ padding: '0.25rem 0.5rem', fontSize: '0.7rem', color: '#f43f5e', background: 'rgba(244,63,94,0.05)' }}
+                              aria-label="Remove"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* PDF Configuration Options */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1.25rem', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1rem' }}>
+                      <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                        <label htmlFor="orientation-field" style={{ fontSize: '0.7rem' }}>Orientation</label>
+                        <select 
+                          id="orientation-field"
+                          value={pdfOrientation} 
+                          onChange={(e) => setPdfOrientation(e.target.value)}
+                          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--radius-md)', padding: '0.5rem', color: 'var(--text-main)', fontSize: '0.8rem', outline: 'none' }}
+                        >
+                          <option value="portrait">Portrait (Vertical)</option>
+                          <option value="landscape">Landscape (Horizontal)</option>
+                        </select>
+                      </div>
+                      <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column' }}>
+                        <label htmlFor="margin-field" style={{ fontSize: '0.7rem' }}>Page Margin</label>
+                        <select 
+                          id="margin-field"
+                          value={pdfMargin} 
+                          onChange={(e) => setPdfMargin(e.target.value)}
+                          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--radius-md)', padding: '0.5rem', color: 'var(--text-main)', fontSize: '0.8rem', outline: 'none' }}
+                        >
+                          <option value="none">No Margins (Full Size)</option>
+                          <option value="small">Small (5mm)</option>
+                          <option value="normal">Normal (10mm)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button 
+                      className="btn btn-primary" 
+                      onClick={handleConvertJpgToPdf} 
+                      style={{ width: '100%', padding: '0.8rem', fontWeight: 700, marginTop: '1.25rem' }}
+                    >
+                      Convert & Download PDF
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* PDF TO JPG COLUMN */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ fontSize: '1.5rem' }}>📄</span>
+                <h3 style={{ margin: 0 }}>PDF to JPG Converter</h3>
+              </div>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                Upload a PDF document, preview its pages, and extract them as high-quality individual JPG images.
+              </p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.25rem' }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                  <label htmlFor="jpg-pdf-input" style={{ display: 'block', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.5rem' }}>Select PDF Document</label>
+                  <input 
+                    id="jpg-pdf-input"
+                    type="file" 
+                    accept="application/pdf" 
+                    onChange={handlePdfToJpgUpload} 
+                    style={{ fontSize: '0.8rem', width: '100%' }}
+                  />
+                </div>
+
+                {pdfToJpgFile && (
+                  <div style={{ background: 'rgba(0,0,0,0.15)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1, marginRight: '0.5rem' }}>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-main)', display: 'block', textOverflow: 'ellipsis', overflow: 'hidden' }}>{pdfToJpgFile.name}</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Size: {(pdfToJpgFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                      </div>
+                      <div className="input-group-label" style={{ display: 'flex', flexDirection: 'column', width: '90px' }}>
+                        <label htmlFor="quality-field" style={{ fontSize: '0.65rem' }}>Render Quality</label>
+                        <select 
+                          id="quality-field"
+                          value={renderScale} 
+                          onChange={(e) => setRenderScale(parseFloat(e.target.value))}
+                          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--radius-sm)', padding: '0.25rem', color: 'var(--text-main)', fontSize: '0.75rem', outline: 'none' }}
+                        >
+                          <option value={1.0}>1x (Low)</option>
+                          <option value={1.5}>1.5x (Medium)</option>
+                          <option value={2.0}>2x (High)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button 
+                      className="btn btn-primary" 
+                      onClick={handleConvertPdfToJpg} 
+                      disabled={isPdfProcessing}
+                      style={{ width: '100%', padding: '0.8rem', fontWeight: 700, marginBottom: '1.5rem' }}
+                    >
+                      {isPdfProcessing ? 'Extracting Pages...' : 'Extract & Preview Pages'}
+                    </button>
+
+                    {pdfToJpgPages.length > 0 && (
+                      <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '1.25rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)', display: 'block', marginBottom: '1rem' }}>Extracted Pages ({pdfToJpgPages.length} of {pdfPageCount})</span>
+                        
+                        <div className="pdf-pages-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '1rem', maxHeight: '350px', overflowY: 'auto', paddingRight: '0.25rem' }}>
+                          {pdfToJpgPages.map((page) => (
+                            <div key={page.pageNum} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 'var(--radius-sm)', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                              <div style={{ width: '100%', height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', borderRadius: '4px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.04)' }}>
+                                <img src={page.dataUrl} alt={`Page ${page.pageNum}`} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                              </div>
+                              <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>Page {page.pageNum}</span>
+                              <button 
+                                className="btn btn-primary" 
+                                onClick={() => handleDownloadSingleJpg(page)} 
+                                style={{ width: '100%', padding: '0.35rem 0.5rem', fontSize: '0.7rem' }}
+                              >
+                                Download JPG
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
           </div>
         )}
 
