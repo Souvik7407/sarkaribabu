@@ -528,7 +528,7 @@ export default function App() {
           </svg>
         </button>
         <div className="mobile-brand">
-          <img src="/logo.jpg" alt="Logo" className="mobile-logo-img" />
+          <img src="/logo.png" alt="Logo" className="mobile-logo-img" />
           <span className="mobile-brand-title"><span className="brand-orange">SARKARI</span> <span className="brand-green">BABU</span></span>
         </div>
         <button className="mobile-theme-btn" onClick={() => setIsLightTheme(prev => !prev)} aria-label="Toggle Theme">
@@ -572,7 +572,7 @@ export default function App() {
           <div className="footer-content">
             <div className="footer-brand-section">
               <div className="footer-brand">
-                <img src="/logo.jpg" alt="SARKARI BABU Logo" className="footer-logo-img" />
+                <img src="/logo.png" alt="SARKARI BABU Logo" className="footer-logo-img" />
                 <span><span className="brand-orange">SARKARI</span> <span className="brand-green">BABU</span></span>
               </div>
               <p className="footer-tagline">High-yield revision summaries stripped of fluff, calibrated for competitive exams (UPSC, SSC, Banking, Railways, Defence, State PSC).</p>

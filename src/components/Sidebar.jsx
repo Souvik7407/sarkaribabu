@@ -120,7 +120,7 @@ export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, 
 
         <div className="sidebar-brand">
           <div className="brand-icon">
-            <img src="/logo.jpg" alt="SARKARI BABU Logo" className="brand-logo-img" />
+            <img src="/logo.png" alt="SARKARI BABU Logo" className="brand-logo-img" />
           </div>
           <div className="brand-text">
             <h2><span className="brand-orange">SARKARI</span> <span className="brand-green">BABU</span></h2>
