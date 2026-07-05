@@ -1924,13 +1924,13 @@ export function generateDailyNewsForDate(date) {
 export const initialJobOpenings = [
   {
     id: "job-1",
-    title: "UPSC Civil Services (IAS/IPS) Exam 2026",
+    title: "UPSC Assistant Engineer & Drug Inspector 2026",
     organization: "Union Public Service Commission",
-    startDate: "2026-06-10",
-    closingDate: "2026-07-10",
+    startDate: "2026-06-15",
+    closingDate: "2026-07-17",
     applyUrl: "https://upsconline.nic.in",
     examTarget: "UPSC",
-    vacancies: "1,056 Posts"
+    vacancies: "450+ Posts"
   },
   {
     id: "job-2",
@@ -1944,42 +1944,43 @@ export const initialJobOpenings = [
   },
   {
     id: "job-3",
-    title: "IBPS PO (Probationary Officers) XIV",
+    title: "IBPS PO & SO Recruitment XV 2026",
     organization: "Institute of Banking Personnel Selection",
     startDate: "2026-07-01",
-    closingDate: "2026-07-25",
+    closingDate: "2026-07-21",
     applyUrl: "https://ibps.in",
     examTarget: "Banking",
-    vacancies: "4,200 Posts"
+    vacancies: "6,715 Posts"
   },
   {
     id: "job-4",
-    title: "RRB NTPC (Non-Technical Popular Categories)",
+    title: "RRB Technician Recruitment 2026",
     organization: "Railway Recruitment Boards",
-    startDate: "2026-06-05",
-    closingDate: "2026-07-05",
+    startDate: "2026-06-25",
+    closingDate: "2026-07-29",
     applyUrl: "https://indianrailways.gov.in",
     examTarget: "Railways",
-    vacancies: "11,500 Posts"
+    vacancies: "6,557 Posts"
   },
   {
     id: "job-5",
-    title: "AFCAT (I) 2026 Officer Entry",
+    title: "IAF Agniveervayu Intake 02/2027",
     organization: "Indian Air Force",
-    startDate: "2026-06-01",
-    closingDate: "2026-06-30",
-    applyUrl: "https://afcat.cdac.in",
+    startDate: "2026-07-06",
+    closingDate: "2026-07-26",
+    applyUrl: "https://agnipathvayu.cdac.in",
     examTarget: "Defence",
-    vacancies: "317 Posts"
+    vacancies: "3,500+ Posts"
   },
   {
     id: "job-6",
     title: "State Civil Services Examination 2026",
     organization: "Public Service Commission",
     startDate: "2026-06-15",
-    closingDate: "2026-07-18",
+    closingDate: "2026-07-28",
     applyUrl: "https://psc.gov.in",
     examTarget: "State PSC",
+    vacancies: "750 Posts"
   }
 ];
 
