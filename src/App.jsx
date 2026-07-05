@@ -7,7 +7,6 @@ import StaticGK from './components/StaticGK';
 import QuizZone from './components/QuizZone';
 import Bookmarks from './components/Bookmarks';
 import Criteria from './components/Criteria';
-import AudioPlayer from './components/AudioPlayer';
 import AITutor from './components/AITutor';
 import BuyMaterial from './components/BuyMaterial';
 import InfoModal from './components/InfoModal';
@@ -556,8 +555,7 @@ export default function App() {
         onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Floating Ambient Audio Player */}
-      <AudioPlayer />
+
 
       {/* Main Content Pane */}
       <main className="main-content">
