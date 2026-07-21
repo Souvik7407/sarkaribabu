@@ -2,6 +2,57 @@
 
 export const initialCurrentAffairs = [
   {
+    id: "ca-18",
+    title: "India Participates in the 8th WTO Trade Policy Review in Geneva",
+    date: "2026-07-21",
+    category: "politics",
+    tags: ["WTO", "Trade", "Economy", "Foreign Policy"],
+    readTime: "2 mins",
+    source: "PIB Geneva Bureau",
+    oneLiner: "India successfully presented its economic milestones, highlighting an average growth rate of 8% and record exports of USD 863.1 billion, at its 8th WTO Trade Policy Review.",
+    summary: [
+      "The Trade Policy Review (TPR) is a key mechanism under the WTO to monitor member countries' trade practices and policy structures.",
+      "The Commerce Secretary addressed international queries regarding India's import licensing rules, custom tariff rates, and food security provisions.",
+      "India reaffirmed its commitment to multilateral trade rules while safeguarding interests of agricultural and MSME sectors.",
+      "UPSC Relevance: Core international trade institution mechanics (WTO, TPRM), India's balance of trade stats, and global trade dispute resolution systems."
+    ],
+    examTarget: ["UPSC", "SSC", "State PSC"]
+  },
+  {
+    id: "ca-17",
+    title: "India Flags Off First Hydrogen-Powered Passenger Train in Haryana",
+    date: "2026-07-21",
+    category: "technology",
+    tags: ["Green Energy", "Hydrogen Train", "Railways", "Clean Tech"],
+    readTime: "2 mins",
+    source: "Ministry of Railways",
+    oneLiner: "India's first indigenous hydrogen-powered passenger train has been flagged off to run on the Jind-Sonipat route in Haryana, marking a zero-emission transport milestone.",
+    summary: [
+      "The train utilizes onboard fuel cell stacks to convert hydrogen and oxygen into electricity, producing only water vapor and heat as byproducts.",
+      "Aims to replace diesel locomotives on heritage and branch lines under the 'Hydrogen for Heritage' railway modernization scheme.",
+      "Fitted with safety sensors, leakage detectors, and advanced thermal management to guarantee hydrogen gas containment.",
+      "SSC & Railways Relevance: Trial route endpoints (Jind and Sonipat, Haryana), fuel cell operating chemical concepts, and zero-emission goals under Net-Zero 2070."
+    ],
+    examTarget: ["UPSC", "SSC", "State PSC"]
+  },
+  {
+    id: "ca-16",
+    title: "EPFO Launches 'VISHWAS 2026' Subscriber Welfare Initiative",
+    date: "2026-07-20",
+    category: "politics",
+    tags: ["EPFO", "Welfare", "Social Security", "Digital India"],
+    readTime: "2 mins",
+    source: "EPFO Press Release",
+    oneLiner: "The Employees' Provident Fund Organisation (EPFO) has launched 'VISHWAS 2026' to implement value-driven claims processing and digital pension settlements.",
+    summary: [
+      "VISHWAS stands for 'Value-driven Initiative for Social security and Holistic Welfare of All Subscribers'.",
+      "Features a fully automated, API-based pension claim settlement module that resolves general PF claims within 48 hours.",
+      "Integrates with DigiLocker and UMANG platforms for direct biometric e-KYC and digital life certificate submissions.",
+      "SSC & Bank Exams Relevance: Full form of VISHWAS, parent organization (EPFO), administrative ministry (Ministry of Labour and Employment)."
+    ],
+    examTarget: ["UPSC", "SSC", "State PSC"]
+  },
+  {
     id: "ca-15",
     title: "Government Launches 'Viksit UDAN' Phase with ₹28,840 Crore Outlay",
     date: "2026-07-20",
