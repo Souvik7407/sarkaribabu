@@ -1924,63 +1924,63 @@ export function generateDailyNewsForDate(date) {
 export const initialJobOpenings = [
   {
     id: "job-1",
-    title: "UPSC Assistant Engineer & Drug Inspector 2026",
+    title: "UPSC Principal & Vice-Principal Exam 2026",
     organization: "Union Public Service Commission",
-    startDate: "2026-06-15",
-    closingDate: "2026-07-17",
+    startDate: "2026-07-15",
+    closingDate: "2026-08-14",
     applyUrl: "https://upsconline.nic.in",
     examTarget: "UPSC",
-    vacancies: "450+ Posts"
+    vacancies: "360 Posts"
   },
   {
     id: "job-2",
-    title: "SSC CGL (Combined Graduate Level) 2026",
+    title: "SSC MTS & Havildar Recruitment 2026",
     organization: "Staff Selection Commission",
-    startDate: "2026-06-20",
-    closingDate: "2026-07-20",
+    startDate: "2026-07-10",
+    closingDate: "2026-08-15",
     applyUrl: "https://ssc.gov.in",
     examTarget: "SSC",
-    vacancies: "8,400 Posts"
+    vacancies: "9,580 Posts"
   },
   {
     id: "job-3",
-    title: "IBPS PO & SO Recruitment XV 2026",
+    title: "IBPS Clerk Recruitment XVI 2026",
     organization: "Institute of Banking Personnel Selection",
-    startDate: "2026-07-01",
-    closingDate: "2026-07-21",
+    startDate: "2026-07-18",
+    closingDate: "2026-08-16",
     applyUrl: "https://ibps.in",
     examTarget: "Banking",
-    vacancies: "6,715 Posts"
+    vacancies: "6,128 Posts"
   },
   {
     id: "job-4",
-    title: "RRB Technician Recruitment 2026",
+    title: "RRB Group D (Track Maintainer & Asst) 2026",
     organization: "Railway Recruitment Boards",
-    startDate: "2026-06-25",
-    closingDate: "2026-07-29",
+    startDate: "2026-07-20",
+    closingDate: "2026-08-25",
     applyUrl: "https://indianrailways.gov.in",
     examTarget: "Railways",
-    vacancies: "6,557 Posts"
+    vacancies: "18,400 Posts"
   },
   {
     id: "job-5",
-    title: "IAF Agniveervayu Intake 02/2027",
-    organization: "Indian Air Force",
-    startDate: "2026-07-06",
-    closingDate: "2026-07-26",
-    applyUrl: "https://agnipathvayu.cdac.in",
+    title: "CISF Asst Sub-Inspector & Head Constable 2026",
+    organization: "Central Industrial Security Force",
+    startDate: "2026-07-12",
+    closingDate: "2026-08-11",
+    applyUrl: "https://cisfrectt.cisf.gov.in",
     examTarget: "Defence",
-    vacancies: "3,500+ Posts"
+    vacancies: "1,247 Posts"
   },
   {
     id: "job-6",
-    title: "State Civil Services Examination 2026",
-    organization: "Public Service Commission",
-    startDate: "2026-06-15",
-    closingDate: "2026-07-28",
-    applyUrl: "https://psc.gov.in",
+    title: "Rajasthan High Court Stenographer & Clerk 2026",
+    organization: "Rajasthan High Court",
+    startDate: "2026-07-15",
+    closingDate: "2026-08-10",
+    applyUrl: "https://hcraj.nic.in",
     examTarget: "State PSC",
-    vacancies: "750 Posts"
+    vacancies: "512 Posts"
   }
 ];
 
