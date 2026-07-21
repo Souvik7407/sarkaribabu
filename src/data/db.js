@@ -2,6 +2,57 @@
 
 export const initialCurrentAffairs = [
   {
+    id: "ca-15",
+    title: "Government Launches 'Viksit UDAN' Phase with ₹28,840 Crore Outlay",
+    date: "2026-07-20",
+    category: "politics",
+    tags: ["Aviation", "Connectivity", "Infrastructure", "PIB"],
+    readTime: "2 mins",
+    source: "Ministry of Civil Aviation",
+    oneLiner: "The Government of India has launched the next phase of the Regional Connectivity Scheme (RCS), 'Viksit UDAN', with an outlay of ₹28,840 crore to boost air travel to Tier-2 and Tier-3 cities.",
+    summary: [
+      "The program spans a 10-year period from 2026-27 to 2035-36 to enhance regional aviation markets.",
+      "Aims to operationalize 150 underserved/unserved airports, helipads, and water aerodromes across rural and remote regions.",
+      "Introduces viability gap funding (VGF) revisions to support electric regional aircraft operations.",
+      "UPSC Relevance: Essential study update on domestic infrastructure connectivity, regional economic integration, and public-private partnership (PPP) frameworks."
+    ],
+    examTarget: ["UPSC", "SSC", "State PSC"]
+  },
+  {
+    id: "ca-14",
+    title: "CDSCO Approves India's First Indigenous Dengue Vaccine",
+    date: "2026-07-19",
+    category: "science",
+    tags: ["Health", "Vaccine", "CDSCO", "Medical Science"],
+    readTime: "2 mins",
+    source: "CDSCO Press Release",
+    oneLiner: "The Central Drugs Standard Control Organisation (CDSCO) has officially approved India's first indigenous tetravalent dengue vaccine for phase-restricted rollout.",
+    summary: [
+      "Developed jointly by local biotechnology research firms and ICMR, targeting all four dengue serotypes (DEN-1 to DEN-4).",
+      "Demonstrated over 82% efficacy in late-stage clinical trials across diverse age groups in endemic regions.",
+      "Will be incorporated into the national vector-borne disease control program in high-burden states.",
+      "SSC & State PSC Relevance: Scientific name of the vaccine platform, approving authority (CDSCO), and general viral structure of the Flavivirus genus."
+    ],
+    examTarget: ["UPSC", "SSC", "State PSC"]
+  },
+  {
+    id: "ca-13",
+    title: "Skyroot Aerospace Successfully Launches Vikram-1 Rocket Under Mission Aagaman",
+    date: "2026-07-18",
+    category: "technology",
+    tags: ["Space Tech", "Skyroot", "Vikram-1", "Private Space"],
+    readTime: "2 mins",
+    source: "Skyroot Press Release",
+    oneLiner: "Skyroot Aerospace has successfully launched Vikram-1, India's first privately developed orbital-class rocket, making India the third country to achieve private orbital launch capability.",
+    summary: [
+      "Vikram-1 is a multi-stage solid-fuel launch vehicle capable of carrying up to 300 kg payloads to low Earth orbit (LEO).",
+      "Launched from a private mobile launchpad under IN-SPACe authorization and authorization framework 'Mission Aagaman'.",
+      "Features full carbon-composite body structures and 3D-printed liquid engine injectors.",
+      "UPSC & SSC Relevance: Name of the private operator (Skyroot), payload capability (300 kg), private launch coordinator (IN-SPACe), and historical context of private space participation in India."
+    ],
+    examTarget: ["UPSC", "SSC", "State PSC"]
+  },
+  {
     id: "ca-1",
     title: "Launch of NISAR Satellite: Joint ISRO-NASA Earth Observation Mission",
     date: "2026-06-22",
