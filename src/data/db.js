@@ -2026,37 +2026,37 @@ export function generateDailyNewsForDate(date) {
 export const initialJobOpenings = [
   {
     id: "job-1",
-    title: "UPSC Principal & Vice-Principal Exam 2026",
+    title: "UPSC Asst Executive Engineer & Research Officer",
     organization: "Union Public Service Commission",
-    startDate: "2026-07-15",
-    closingDate: "2026-08-14",
+    startDate: "2026-07-28",
+    closingDate: "2026-08-28",
     applyUrl: "https://upsconline.nic.in",
     examTarget: "UPSC",
-    vacancies: "360 Posts"
+    vacancies: "34 Posts"
   },
   {
     id: "job-2",
-    title: "SSC MTS & Havildar Recruitment 2026",
+    title: "SSC Junior Hindi Translator (JHT) 2026",
     organization: "Staff Selection Commission",
-    startDate: "2026-07-10",
-    closingDate: "2026-08-15",
+    startDate: "2026-08-18",
+    closingDate: "2026-09-16",
     applyUrl: "https://ssc.gov.in",
     examTarget: "SSC",
-    vacancies: "9,580 Posts"
+    vacancies: "312 Posts"
   },
   {
     id: "job-3",
-    title: "IBPS Clerk Recruitment XVI 2026",
+    title: "IBPS Clerk Recruitment 2026",
     organization: "Institute of Banking Personnel Selection",
-    startDate: "2026-07-18",
-    closingDate: "2026-08-16",
+    startDate: "2026-07-25",
+    closingDate: "2026-08-21",
     applyUrl: "https://ibps.in",
     examTarget: "Banking",
-    vacancies: "6,128 Posts"
+    vacancies: "11,403 Posts"
   },
   {
     id: "job-4",
-    title: "RRB Group D (Track Maintainer & Asst) 2026",
+    title: "RRB Group D (Track Maintainer & Assistants)",
     organization: "Railway Recruitment Boards",
     startDate: "2026-07-20",
     closingDate: "2026-08-25",
@@ -2066,23 +2066,23 @@ export const initialJobOpenings = [
   },
   {
     id: "job-5",
-    title: "CISF Asst Sub-Inspector & Head Constable 2026",
-    organization: "Central Industrial Security Force",
-    startDate: "2026-07-12",
-    closingDate: "2026-08-11",
-    applyUrl: "https://cisfrectt.cisf.gov.in",
+    title: "ITBP CAPFs Medical Officer & Specialist 2026",
+    organization: "Indo-Tibetan Border Police",
+    startDate: "2026-08-10",
+    closingDate: "2026-09-08",
+    applyUrl: "https://itbpolice.nic.in",
     examTarget: "Defence",
-    vacancies: "1,247 Posts"
+    vacancies: "282 Posts"
   },
   {
     id: "job-6",
-    title: "Rajasthan High Court Stenographer & Clerk 2026",
-    organization: "Rajasthan High Court",
-    startDate: "2026-07-15",
-    closingDate: "2026-08-10",
-    applyUrl: "https://hcraj.nic.in",
+    title: "TSLPRB Telangana Police SI & ASI Recruitment",
+    organization: "Telangana State Level Police Board",
+    startDate: "2026-08-10",
+    closingDate: "2026-09-09",
+    applyUrl: "https://tslprb.co.in",
     examTarget: "State PSC",
-    vacancies: "512 Posts"
+    vacancies: "298 Posts"
   }
 ];
 
