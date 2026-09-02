@@ -292,6 +292,64 @@ export default function Dashboard({
             </button>
           </div>
         </div>
+
+        {/* Live Study Progress & Target Tracker */}
+        <div className="dashboard-card glass-card progress-dashboard-card">
+          <div className="card-header-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 20v-6M6 20V10M18 20V4" />
+            </svg>
+            <div className="progress-card-title-wrap">
+              <h3>Live Study Progress</h3>
+              <span className="stats-live-badge">
+                <span className="live-dot-pulse"></span>
+                <span>SYNCED</span>
+              </span>
+            </div>
+          </div>
+          <p className="card-desc">Real-time tracking of your daily revision streak, articles read, quiz performance, and bookmarked notes.</p>
+          
+          <div className="dashboard-progress-stats">
+            <div className="d-stat-box">
+              <span className="d-stat-num">🔥 {stats?.streak || 0}</span>
+              <span className="d-stat-name">Day Streak</span>
+            </div>
+            <div className="d-stat-box">
+              <span className="d-stat-num">📚 {stats?.readArticlesCount || 0}</span>
+              <span className="d-stat-name">Articles Read</span>
+            </div>
+            <div className="d-stat-box">
+              <span className="d-stat-num">🎯 {stats?.quizScore || 0}%</span>
+              <span className="d-stat-name">Quiz Accuracy</span>
+            </div>
+            <div className="d-stat-box">
+              <span className="d-stat-num">🔖 {stats?.bookmarksCount || 0}</span>
+              <span className="d-stat-name">Saved Items</span>
+            </div>
+          </div>
+
+          <div className="daily-goal-bar-wrap">
+            <div className="goal-labels">
+              <span>Daily Study Goal ({(stats?.readArticlesCount || 0) >= 5 ? 'Completed 🎉' : `${stats?.readArticlesCount || 0}/5 Articles`})</span>
+              <span>{Math.min(100, Math.round(((stats?.readArticlesCount || 0) / 5) * 100))}%</span>
+            </div>
+            <div className="progress-bar-outer">
+              <div 
+                className="progress-bar-inner" 
+                style={{ width: `${Math.min(100, Math.max(8, ((stats?.readArticlesCount || 0) / 5) * 100))}%` }}
+              ></div>
+            </div>
+          </div>
+
+          <div className="progress-card-actions">
+            <button className="btn-link" onClick={() => setActiveTab('current-affairs')}>
+              Read Current Affairs &rarr;
+            </button>
+            <button className="btn-link" onClick={() => setActiveTab('quiz-zone')}>
+              Practice Quizzes &rarr;
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Live Government Job Alerts Section */}

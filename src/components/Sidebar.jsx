@@ -152,7 +152,13 @@ export default function Sidebar({ activeTab, setActiveTab, stats, isLightTheme, 
       <div className="sidebar-divider"></div>
 
       <div className="sidebar-stats-card glass-card">
-        <h4 className="stats-card-title">YOUR PROGRESS</h4>
+        <div className="stats-card-header">
+          <h4 className="stats-card-title">YOUR PROGRESS</h4>
+          <span className="stats-live-badge">
+            <span className="live-dot-pulse"></span>
+            <span>LIVE</span>
+          </span>
+        </div>
         <div className="stats-grid">
           <div className="stat-item">
             <span className="stat-value">🔥 {stats.streak}</span>
