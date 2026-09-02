@@ -2026,63 +2026,63 @@ export function generateDailyNewsForDate(date) {
 export const initialJobOpenings = [
   {
     id: "job-1",
-    title: "UPSC Asst Executive Engineer & Research Officer",
+    title: "UPSC EPFO Assistant Provident Fund Commissioner (APFC)",
     organization: "Union Public Service Commission",
-    startDate: "2026-07-28",
-    closingDate: "2026-08-28",
+    startDate: "2026-08-22",
+    closingDate: "2026-09-24",
     applyUrl: "https://upsconline.nic.in",
     examTarget: "UPSC",
-    vacancies: "34 Posts"
+    vacancies: "80 Posts"
   },
   {
     id: "job-2",
-    title: "SSC Junior Hindi Translator (JHT) 2026",
+    title: "SSC GD Constable (CAPFs, SSF & Assam Rifles) 2026-27",
     organization: "Staff Selection Commission",
-    startDate: "2026-08-18",
-    closingDate: "2026-09-16",
+    startDate: "2026-09-05",
+    closingDate: "2026-10-05",
     applyUrl: "https://ssc.gov.in",
     examTarget: "SSC",
-    vacancies: "312 Posts"
+    vacancies: "39,481 Posts"
   },
   {
     id: "job-3",
-    title: "IBPS Clerk Recruitment 2026",
+    title: "IBPS RRB CRP-XV (Officers & Office Assistants)",
     organization: "Institute of Banking Personnel Selection",
-    startDate: "2026-07-25",
-    closingDate: "2026-08-21",
+    startDate: "2026-09-01",
+    closingDate: "2026-09-21",
     applyUrl: "https://ibps.in",
     examTarget: "Banking",
-    vacancies: "11,403 Posts"
+    vacancies: "13,706 Posts"
   },
   {
     id: "job-4",
-    title: "RRB Group D (Track Maintainer & Assistants)",
+    title: "RRB Junior Engineer (JE) & DMS Recruitment 2026",
     organization: "Railway Recruitment Boards",
-    startDate: "2026-07-20",
-    closingDate: "2026-08-25",
-    applyUrl: "https://indianrailways.gov.in",
+    startDate: "2026-08-14",
+    closingDate: "2026-09-18",
+    applyUrl: "https://rrbapply.gov.in",
     examTarget: "Railways",
-    vacancies: "18,400 Posts"
+    vacancies: "3,993 Posts"
   },
   {
     id: "job-5",
-    title: "ITBP CAPFs Medical Officer & Specialist 2026",
-    organization: "Indo-Tibetan Border Police",
-    startDate: "2026-08-10",
-    closingDate: "2026-09-08",
-    applyUrl: "https://itbpolice.nic.in",
+    title: "Army Ordnance Corps (AOC) Group C Civilian Recruitment",
+    organization: "Ministry of Defence (Army AOC)",
+    startDate: "2026-08-24",
+    closingDate: "2026-09-22",
+    applyUrl: "https://aocrecruitment.gov.in",
     examTarget: "Defence",
-    vacancies: "282 Posts"
+    vacancies: "2,615 Posts"
   },
   {
     id: "job-6",
-    title: "TSLPRB Telangana Police SI & ASI Recruitment",
-    organization: "Telangana State Level Police Board",
-    startDate: "2026-08-10",
-    closingDate: "2026-09-09",
-    applyUrl: "https://tslprb.co.in",
+    title: "BPSC School Teacher & Headmaster (TRE 4.0)",
+    organization: "Bihar Public Service Commission",
+    startDate: "2026-09-21",
+    closingDate: "2026-10-20",
+    applyUrl: "https://bpsc.bihar.gov.in",
     examTarget: "State PSC",
-    vacancies: "298 Posts"
+    vacancies: "32,388 Posts"
   }
 ];
 
